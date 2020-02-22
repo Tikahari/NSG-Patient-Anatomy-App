@@ -8,3 +8,5 @@ https://lorensen.github.io/VTKExamples/site/Cxx/SimpleOperations/DistancePointTo
 	- example vtk program in c++
 https://www.cancerimagingarchive.net/collections/
 	- download dicom files
+https://itk.org/pipermail/insight-users/2011-February/039785.html
+	-link Michael mentioned where segmentation needs to occur before conversion to 3d object

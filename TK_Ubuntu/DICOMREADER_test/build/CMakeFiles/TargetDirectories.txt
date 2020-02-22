@@ -1,0 +1,3 @@
+/home/tkhanal/Desktop/DICOMREADER_test/build/CMakeFiles/rebuild_cache.dir
+/home/tkhanal/Desktop/DICOMREADER_test/build/CMakeFiles/ReadDICOMSeries.dir
+/home/tkhanal/Desktop/DICOMREADER_test/build/CMakeFiles/edit_cache.dir
