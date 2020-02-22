@@ -1,0 +1,10 @@
+Links:
+
+https://vtk.org/Wiki/VTK/Build_System_Migration
+	- CMake for vtk
+https://itk.org/ITKSoftwareGuide/html/Book1/ITKSoftwareGuide-Book1ch2.html
+	- CMake for itk
+https://lorensen.github.io/VTKExamples/site/Cxx/SimpleOperations/DistancePointToLine/
+	- example vtk program in c++
+https://www.cancerimagingarchive.net/collections/
+	- download dicom files
