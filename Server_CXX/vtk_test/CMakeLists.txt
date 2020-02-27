@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.0.2)
+project(vtkApplication)
+set(VTK_DIR "/home/tkhanal/projects/VTK-build")
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+add_executable(myApplication test_vtk.cxx)
+target_link_libraries(myApplication ${VTK_LIBRARIES})

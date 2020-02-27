@@ -1,0 +1,3 @@
+/home/tkhanal/Desktop/itk_test/build/CMakeFiles/rebuild_cache.dir
+/home/tkhanal/Desktop/itk_test/build/CMakeFiles/test.dir
+/home/tkhanal/Desktop/itk_test/build/CMakeFiles/edit_cache.dir

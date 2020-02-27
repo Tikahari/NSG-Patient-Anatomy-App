@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.9.5)
+project(test) 
+set(ITK_DIR "/usr/local/itk/InsightToolkit-5.0.1/bin")
+find_package(ITK REQUIRED)
+include(${ITK_USE_FILE})
+add_executable(test test_itk.cxx)
+target_link_libraries(test ${ITK_LIBRARIES})
