@@ -1,0 +1,38 @@
+Links:
+
+https://vtk.org/Wiki/VTK/Build_System_Migration
+	- CMake for vtk
+https://itk.org/ITKSoftwareGuide/html/Book1/ITKSoftwareGuide-Book1ch2.html
+	- CMake for itk
+https://lorensen.github.io/VTKExamples/site/Cxx/SimpleOperations/DistancePointToLine/
+	- example vtk program in c++
+https://www.cancerimagingarchive.net/collections/
+	- download dicom files
+https://itk.org/pipermail/insight-users/2011-February/039785.html
+	-link Michael mentioned where segmentation needs to occur before conversion to 3d object
+https://vtk.org/Wiki/VTK/Tutorials/SmartPointers
+	- what is smart pointer
+http://dgobbi.github.io/vtk-dicom/doc/vtk-dicom.pdf
+	- basics of dicom file and how it is read by vtk
+https://vtk.org/doc/release/5.0/html/a01146.html, https://vtk.org/doc/release/5.0/html/a01918.html
+	- what is a vtkactor and vtkprop
+https://vtk.org/doc/nightly/html/classvtkMapper.html
+	- what is mapper
+https://microchipdeveloper.com/gfx:primitives, https://root.cern.ch/basic-graphics-primitives
+	- what is graphics primitive (line, circle, character font
+https://www.geeksforgeeks.org/z-buffer-depth-buffer-method/
+	- intro to z buffer
+http://www2.imm.dtu.dk/projects/MeshMed/papers.html
+	- what is mesh
+[0: 43, 70, 219; 430: 32,] https://itk.org/ItkSoftwareGuide.pdf
+	* 484
+https://blog.kitware.com/writing-stl-files-from-itk-for-3d-printing/
+	- configuring itk's image writer to write an stl file
+https://github.com/dave3d/dicom2stl/blob/master/vtkutils.py
+	- dicom2stl github
+http://vtk.1045678.n5.nabble.com/how-to-read-dicom-file-using-python-td1244595.html
+	- using dicomimagereader in python
+https://quppler.com/visualization-toolkit-vtk-volume-rendering-pipeline/
+	- vtk pipeline (classes/structs, dependencies)
+https://github.com/JanaLipkova/s3
+	- skull stripping atlas segmentation
