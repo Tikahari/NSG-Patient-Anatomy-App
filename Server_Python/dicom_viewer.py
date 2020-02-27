@@ -35,9 +35,3 @@ while True:
         print('down')
         sl = sl-1
         view.SetSlice(sl)
-
-time.sleep(20000)asattr(data_item, 'SliceLocation'):
-                tem.append(data_item)
-                numFiles += 1
-            else:
-                rejected

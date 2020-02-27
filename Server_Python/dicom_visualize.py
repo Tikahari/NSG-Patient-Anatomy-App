@@ -12,7 +12,7 @@ def dicom_visualize(PathDicom):
     
     threshold = vtk.vtkImageThreshold ()
     threshold.SetInputConnection(reader.GetOutputPort())
-    # threshold.ThresholdByLower(100)  # remove all soft tissue
+    threshold.ThresholdByLower(100)  # remove all soft tissue
     threshold.ReplaceInOn()
     threshold.SetInValue(0)  # set all values below 400 to 0
     threshold.ReplaceOutOn()
@@ -21,7 +21,7 @@ def dicom_visualize(PathDicom):
 
     extract_data = vtk.vtkContourFilter()
     extract_data.SetInputConnection(reader.GetOutputPort())
-    # extract_data.SetValue(0, 500)
+    extract_data.SetValue(0, 500)
     surface = vtk.vtkPolyDataNormals()
     surface.SetInputConnection(extract_data.GetOutputPort())
     surface.SetFeatureAngle(90.0)
