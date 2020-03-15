@@ -1,0 +1,6 @@
+from pyntcloud import PyntCloud
+import sys
+
+human_face = PyntCloud.from_file(sys.argv[1])
+
+human_face.plot()
