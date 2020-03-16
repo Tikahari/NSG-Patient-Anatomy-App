@@ -19,14 +19,15 @@ reader = vtk.vtkDICOMImageReader()
 reader.SetDirectoryName(sys.argv[1])
 reader.Update()
 
-th = vtk.vtkThreshold()
-th.SetInputConnection(reader.GetOutputPort());
-th.ThresholdByLower(9999999999999);
-th.Update();
+shiftScale = vtk.vtkImageShiftScale()
+shiftScale.SetInputConnection(reader.GetOutputPort())
+shiftScale.SetShift(100)
+shiftScale.SetScale(0.1)
+shiftScale.SetOutputScalarTypeToUnsignedChar()
 
 view = vtk.vtkImageViewer2()
 view.SetSize(600,600)
-view.SetInputConnection(reader.GetOutputPort())
+view.SetInputConnection(shiftScale.GetOutputPort())
 view.Render()
 sl = 0
 import sys, tty, termios
