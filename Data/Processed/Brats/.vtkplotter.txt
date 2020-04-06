@@ -1,0 +1,2 @@
+python ../../../Server_Python/3d_viewer/nifti_visualize_vtkplotter.py DeepBrainSeg_Prediction.nii.gz  _t1_csf.nii.gz  _t1_gm.nii.gz  
+_t1_wm.nii.gz

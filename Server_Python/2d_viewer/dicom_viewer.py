@@ -21,8 +21,8 @@ reader.Update()
 
 shiftScale = vtk.vtkImageShiftScale()
 shiftScale.SetInputConnection(reader.GetOutputPort())
-shiftScale.SetShift(100)
-shiftScale.SetScale(0.1)
+shiftScale.SetShift(0)
+shiftScale.SetScale(.15)
 shiftScale.SetOutputScalarTypeToUnsignedChar()
 
 view = vtk.vtkImageViewer2()
