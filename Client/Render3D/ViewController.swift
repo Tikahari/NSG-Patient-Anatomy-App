@@ -9,13 +9,17 @@
 import UIKit
 import SceneKit
 
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let scene = SCNScene(named: "./Brain_Model.obj")
+        print("did load")
+//        let document = VTKDocument("doc")
+
+        let scene = SCNScene(named: "Login")
                 
                 // 2: Add camera node
                 let cameraNode = SCNNode()
