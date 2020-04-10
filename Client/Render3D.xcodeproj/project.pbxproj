@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A8FB29E24403A7A0049DBB7 /* vtk in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8FB297244039EF0049DBB7 /* vtk */; };
 		7A8FB2CB244040590049DBB7 /* 17.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7A8FB2A0244040580049DBB7 /* 17.0_label.nii.gz */; };
 		7A8FB2CC244040590049DBB7 /* 24.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7A8FB2A1244040580049DBB7 /* 24.0_label.nii.gz */; };
 		7A8FB2CD244040590049DBB7 /* 255.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7A8FB2A2244040580049DBB7 /* 255.0_label.nii.gz */; };
@@ -51,6 +50,8 @@
 		7A8FB2F3244040590049DBB7 /* 7.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7A8FB2C8244040590049DBB7 /* 7.0_label.nii.gz */; };
 		7A8FB2F4244040590049DBB7 /* 13.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7A8FB2C9244040590049DBB7 /* 13.0_label.nii.gz */; };
 		7A8FB2F5244040590049DBB7 /* 252.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7A8FB2CA244040590049DBB7 /* 252.0_label.nii.gz */; };
+		7A8FB34224406CE40049DBB7 /* vtk in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8FB34124406CE40049DBB7 /* vtk */; };
+		7A8FB34624406D630049DBB7 /* VTKViewer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A8FB34524406D630049DBB7 /* VTKViewer.mm */; };
 		DDA82DB123F07A1A0043A275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA82DB023F07A1A0043A275 /* AppDelegate.swift */; };
 		DDA82DB323F07A1A0043A275 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA82DB223F07A1A0043A275 /* SceneDelegate.swift */; };
 		DDA82DB523F07A1A0043A275 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA82DB423F07A1A0043A275 /* ViewController.swift */; };
@@ -107,6 +108,11 @@
 		7A8FB2C8244040590049DBB7 /* 7.0_label.nii.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = 7.0_label.nii.gz; path = "../../Downloads/test2 5/7.0_label.nii.gz"; sourceTree = "<group>"; };
 		7A8FB2C9244040590049DBB7 /* 13.0_label.nii.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = 13.0_label.nii.gz; path = "../../Downloads/test2 5/13.0_label.nii.gz"; sourceTree = "<group>"; };
 		7A8FB2CA244040590049DBB7 /* 252.0_label.nii.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = 252.0_label.nii.gz; path = "../../Downloads/test2 5/252.0_label.nii.gz"; sourceTree = "<group>"; };
+		7A8FB34124406CE40049DBB7 /* vtk */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = vtk; path = "../../Desktop/Tikahari/VTK-9.0.0.rc1/framework/vtk.framework/vtk"; sourceTree = "<group>"; };
+		7A8FB34324406D630049DBB7 /* Render3D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Render3D-Bridging-Header.h"; sourceTree = "<group>"; };
+		7A8FB34424406D630049DBB7 /* VTKViewer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTKViewer.h; sourceTree = "<group>"; };
+		7A8FB34524406D630049DBB7 /* VTKViewer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VTKViewer.mm; sourceTree = "<group>"; };
+		7A8FB347244071A70049DBB7 /* vtk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vtk.framework; path = "../../Desktop/Tikahari/VTK-9.0.0.rc1/framework/vtk.framework"; sourceTree = "<group>"; };
 		DDA82DAD23F07A1A0043A275 /* Render3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Render3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA82DB023F07A1A0043A275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDA82DB223F07A1A0043A275 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A8FB29E24403A7A0049DBB7 /* vtk in Frameworks */,
+				7A8FB34224406CE40049DBB7 /* vtk in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +138,8 @@
 		7A8FB2922440319E0049DBB7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A8FB347244071A70049DBB7 /* vtk.framework */,
+				7A8FB34124406CE40049DBB7 /* vtk */,
 				7A8FB29B24403A020049DBB7 /* framework */,
 				7A8FB298244039EF0049DBB7 /* Headers */,
 				7A8FB297244039EF0049DBB7 /* vtk */,
@@ -215,9 +223,12 @@
 				DDA82DB223F07A1A0043A275 /* SceneDelegate.swift */,
 				DDA82DB423F07A1A0043A275 /* ViewController.swift */,
 				DDA82DB623F07A1A0043A275 /* Main.storyboard */,
+				7A8FB34424406D630049DBB7 /* VTKViewer.h */,
+				7A8FB34524406D630049DBB7 /* VTKViewer.mm */,
 				DDA82DB923F07A200043A275 /* Assets.xcassets */,
 				DDA82DBB23F07A200043A275 /* LaunchScreen.storyboard */,
 				DDA82DBE23F07A200043A275 /* Info.plist */,
+				7A8FB34324406D630049DBB7 /* Render3D-Bridging-Header.h */,
 			);
 			path = Render3D;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 				TargetAttributes = {
 					DDA82DAC23F07A1A0043A275 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -337,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDA82DB523F07A1A0043A275 /* ViewController.swift in Sources */,
+				7A8FB34624406D630049DBB7 /* VTKViewer.mm in Sources */,
 				DDA82DB123F07A1A0043A275 /* AppDelegate.swift in Sources */,
 				DDA82DB323F07A1A0043A275 /* SceneDelegate.swift in Sources */,
 			);
@@ -483,8 +496,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T77RNNM7G3;
+				HEADER_SEARCH_PATHS = (
+					"/Users/Khanal/Desktop/Tikahari/VTK-9.0.0.rc1/framework/vtk.framework/Headers",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = Render3D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -492,6 +510,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonas.Render3D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Render3D/Render3D-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -501,8 +521,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T77RNNM7G3;
+				HEADER_SEARCH_PATHS = (
+					"/Users/Khanal/Desktop/Tikahari/VTK-9.0.0.rc1/framework/vtk.framework/Headers",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = Render3D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -510,6 +535,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jonas.Render3D;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Render3D/Render3D-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
