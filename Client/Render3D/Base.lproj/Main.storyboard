@@ -15,11 +15,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" sceneName="Brain_Model.obj" allowsCameraControl="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XpO-nP-i56">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </sceneKitView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjq-nu-xq5">
                                 <rect key="frame" x="118" y="422" width="80" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -55,6 +50,7 @@
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
+                                    <action selector="submitAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oH8-JS-QWK"/>
                                     <segue destination="OiC-kB-4R1" kind="show" id="uYg-gu-3fn"/>
                                 </connections>
                             </button>
@@ -75,7 +71,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ru4-gY-AbE"/>
                     <connections>
-                        <outlet property="sceneView" destination="XpO-nP-i56" id="WiF-3u-Mcm"/>
+                        <outlet property="passwordField" destination="Sjq-Jb-98N" id="gSh-lv-fZJ"/>
+                        <outlet property="usernameField" destination="Lzc-OS-eVx" id="gYV-XI-cWv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
