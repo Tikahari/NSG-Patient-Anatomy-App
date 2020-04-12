@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("did load")
@@ -23,6 +24,7 @@ class ViewController: UIViewController {
         
         
     }
+    
     
 
 
@@ -38,18 +40,22 @@ class ViewController: UIViewController {
         let params = ["username":username, "password": password] as! Dictionary<String, String>
         
         //create a urlrequest type, passing in the url to the local server
-        let request = NSMutableURLRequest(url: NSURL(string: "http://127.0.0.1:8000/admin/login/")! as URL)
-        
+        let request = NSMutableURLRequest(url: NSURL(string: "http://127.0.0.1:8000/login?username")! as URL)
+        let bodyData = "username=" + username! + "&password=" + password!;
         //set the method to "POST"
         request.httpMethod = "POST"
-        request.addValue("jvFsM5rh6PtLak1l5hSgAs5uO1vSvagajQFe9T7oqTGdQh8cBGZA5mORApofmX9f", forHTTPHeaderField: "X-CSRF-TOKEN")
+        request.httpBody = bodyData.data(using: String.Encoding.utf8)
         //create a task o
         var task = URLSession.shared.dataTask(with: request as URLRequest){ data, response, error in
-            print(data)
-            print(response)
-            print(error)
-            
-            
+           if let httpResponse = response as? HTTPURLResponse {
+                      if(httpResponse.statusCode == 200){
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "loginSegue", sender: self)
+                        }
+                        
+                      }
+           }
+   
         }
         task.resume()
 }
