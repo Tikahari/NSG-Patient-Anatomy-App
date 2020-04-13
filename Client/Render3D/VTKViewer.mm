@@ -55,8 +55,10 @@
 #define GL_ES_VERSION 3
 
 @interface VTKViewer (){
-    
+    NSString* titleText;
 }
+ @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property (strong, nonatomic) EAGLContext *context;
 - (void)tearDownGL;
 @end
@@ -191,6 +193,8 @@
 {
     [super viewDidLoad];
     [self.navigationItem setHidesBackButton:YES animated:YES];
+    self.titleLabel.text = self->titleText;
+    
     
 #if GL_ES_VERSION == 2
     self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];

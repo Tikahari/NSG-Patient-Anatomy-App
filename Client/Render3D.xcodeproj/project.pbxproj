@@ -14,13 +14,10 @@
 		7A0705FF2443C65F00AD3675 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0705FE2443C65F00AD3675 /* OpenGLES.framework */; };
 		7A0706012443C66600AD3675 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0706002443C66600AD3675 /* QuartzCore.framework */; };
 		7A0706032443C6A800AD3675 /* vtk in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0706022443C6A800AD3675 /* vtk */; };
-		7A0706052443C72C00AD3675 /* aseg.nrrd in Resources */ = {isa = PBXBuildFile; fileRef = 7A0706042443C72C00AD3675 /* aseg.nrrd */; };
 		7A0706072443C73900AD3675 /* aparc.DKTatlas+aseg.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7A0706062443C73900AD3675 /* aparc.DKTatlas+aseg.nii */; };
 		7A0706092444095700AD3675 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0706082444095700AD3675 /* Progress.swift */; };
 		7A07060D244417C300AD3675 /* circlular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07060C244417C300AD3675 /* circlular.swift */; };
 		7A07060F24443B5D00AD3675 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07060E24443B5D00AD3675 /* Selection.swift */; };
-		7A0706112444446F00AD3675 /* IMG_0378.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A0706102444446F00AD3675 /* IMG_0378.jpg */; };
-		7A070613244446B400AD3675 /* IMG_0378-3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A070612244446B400AD3675 /* IMG_0378-3.jpg */; };
 		7A8FB34624406D630049DBB7 /* VTKViewer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A8FB34524406D630049DBB7 /* VTKViewer.mm */; };
 		DDA82DB123F07A1A0043A275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA82DB023F07A1A0043A275 /* AppDelegate.swift */; };
 		DDA82DB323F07A1A0043A275 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA82DB223F07A1A0043A275 /* SceneDelegate.swift */; };
@@ -193,9 +190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A0706072443C73900AD3675 /* aparc.DKTatlas+aseg.nii in Resources */,
-				7A0706112444446F00AD3675 /* IMG_0378.jpg in Resources */,
-				7A070613244446B400AD3675 /* IMG_0378-3.jpg in Resources */,
-				7A0706052443C72C00AD3675 /* aseg.nrrd in Resources */,
 				DDA82DBD23F07A200043A275 /* LaunchScreen.storyboard in Resources */,
 				DDA82DBA23F07A200043A275 /* Assets.xcassets in Resources */,
 				DDA82DB823F07A1A0043A275 /* Main.storyboard in Resources */,
@@ -361,7 +355,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y3QJ47SND3;
+				DEVELOPMENT_TEAM = T77RNNM7G3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -377,7 +371,7 @@
 					/usr/local/Frameworks/vtk.Framework,
 					/usr/local/frameworks/vtk.framework,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "tikaharik-gmail.com";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonas.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Render3D/Render3D-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -391,7 +385,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y3QJ47SND3;
+				DEVELOPMENT_TEAM = T77RNNM7G3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -407,7 +401,7 @@
 					/usr/local/Frameworks/vtk.Framework,
 					/usr/local/frameworks/vtk.framework,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "tikaharik-gmail.com";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jonas.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Render3D/Render3D-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

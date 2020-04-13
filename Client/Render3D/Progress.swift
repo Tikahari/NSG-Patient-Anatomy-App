@@ -12,11 +12,11 @@ class Progress: UIViewController {
     
     
     @IBOutlet var progressCircle: circlular!
-    
+    var buttonClicked : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         let timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(selection), userInfo: nil, repeats: false)
-        
+        print(buttonClicked)
         let rgbColor = UIColor(
             red: 30.0 / 255,
             green: 70.0 / 255,
@@ -40,6 +40,12 @@ class Progress: UIViewController {
     @objc func progress(){
         progressCircle.setProgress(duration: 500000.0, value: 1)
 //        self.performSegue(withIdentifier: "toSelection", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSelection", let vc = segue.destination as? VTKViewer {
+            vc.setValue(buttonClicked, forKey: "titleText");
+        }
     }
     /*
      // MARK: - Navigation
