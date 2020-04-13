@@ -56,6 +56,7 @@ class circlular: UIView {
     func setProgress(duration: TimeInterval, value: Float){
         print("progress set to", value, duration)
         let animation = CABasicAnimation(keyPath: "strokend")
+        self.layer.speed = Float(( 1 / duration))
         animation.duration = duration
         animation.fromValue = 0
         animation.toValue = value

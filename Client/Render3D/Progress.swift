@@ -27,18 +27,17 @@ class Progress: UIViewController {
         progressCircle.trackColor = UIColor.red
         
         progressCircle.layer1Color = UIColor.white
+        //animation speed
+//        progressCircle.layer.speed = 0.05
         self.perform(#selector(progress), with: nil, afterDelay: 2.0)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-                self.perform(#selector(progress), with: nil, afterDelay: 1.0)
-    }
     @objc func selection(){
         self.performSegue(withIdentifier: "toSelection", sender: self)
     }
     
     @objc func progress(){
-        progressCircle.setProgress(duration: 500000.0, value: 1)
+        progressCircle.setProgress(duration: 5.0, value: 1)
 //        self.performSegue(withIdentifier: "toSelection", sender: self)
     }
     /*

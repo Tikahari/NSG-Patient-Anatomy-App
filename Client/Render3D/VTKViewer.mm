@@ -57,6 +57,8 @@
 @interface VTKViewer (){
     
 }
+@property (strong, nonatomic) IBOutlet UILabel *headscanName;
+
 @property (strong, nonatomic) EAGLContext *context;
 - (void)tearDownGL;
 @end
@@ -88,6 +90,11 @@
     }
 }
 
+- (void) addVolume: (NSString*) path
+{
+    
+}
+
 - (void)setupPipeline
 {
     // Register GL2 objects
@@ -108,24 +115,26 @@
     vtkNew<vtkRenderer> renderer;
     renWin->AddRenderer(renderer.Get());
     
-    vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
     
-#if 0
-    vtkNew<vtkRTAnalyticSource> wavelet;
-    wavelet->SetWholeExtent(-127, 128,
-                            -127, 128,
-                            -127, 128);
-    wavelet->SetCenter(0.0, 0.0, 0.0);
+    //#if 1
+    //    vtkNew<vtkRTAnalyticSource> wavelet;
+    //    wavelet->SetWholeExtent(-127, 128,
+    //                            -127, 128,
+    //                            -127, 128);
+    //    wavelet->SetCenter(0.0, 0.0, 0.0);
+    //
+    //    vtkNew<vtkImageCast> ic;
+    //    ic->SetInputConnection(wavelet->GetOutputPort());
+    //    ic->SetOutputScalarTypeToUnsignedChar();
+    //    volumeMapper->SetInputConnection(ic->GetOutputPort());
+    //#else
     
-    vtkNew<vtkImageCast> ic;
-    ic->SetInputConnection(wavelet->GetOutputPort());
-    ic->SetOutputScalarTypeToUnsignedChar();
-    volumeMapper->SetInputConnection(ic->GetOutputPort());
-#else
+    // Add volume 1
+        vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = paths.firstObject;
     std::string fname([basePath UTF8String]);
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"aparc.DKTatlas+aseg" ofType:@"nii"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"14.0_label" ofType:@"nii.gz"];
     fname = ([path UTF8String]);
     //    fname = "/Users/Khanal/Desktop/Tikahari/Downloads/freesurfer_outputs/mri/aparc.a2009s+aseg.nii";
     //    vtkNew<vtkNrrdReader> mi;
@@ -137,7 +146,7 @@
     mi->GetOutput()->GetPointData()->GetScalars()->GetRange(range);
     
     volumeMapper->SetInputConnection(mi->GetOutputPort());
-#endif
+    //#endif
     
     
     volumeMapper->SetAutoAdjustSampleDistances(1);
@@ -183,7 +192,68 @@
     renderer->GradientBackgroundOn();
     renderer->AddVolume(volume.GetPointer());
     renderer->ResetCamera();
-    renderer->GetActiveCamera()->Zoom(1.4);
+    renderer->GetActiveCamera()->Zoom(0.7);
+    
+    //Add volume 2
+        vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper1;
+    NSString *path1 = [[NSBundle mainBundle] pathForResource:@"8.0_label" ofType:@"nii.gz"];
+    fname = ([path1 UTF8String]);
+    //    fname = "/Users/Khanal/Desktop/Tikahari/Downloads/freesurfer_outputs/mri/aparc.a2009s+aseg.nii";
+    //    vtkNew<vtkNrrdReader> mi;
+    vtkNew<vtkNIFTIImageReader> mi1;
+    mi1->SetFileName(fname.c_str());
+    mi1->Update();
+    
+    double range1[2];
+    mi1->GetOutput()->GetPointData()->GetScalars()->GetRange(range1);
+    
+    volumeMapper1->SetInputConnection(mi1->GetOutputPort());
+    //#endif
+    
+    
+    volumeMapper1->SetAutoAdjustSampleDistances(1);
+    volumeMapper1->SetSampleDistance(0.5);
+    
+    vtkNew<vtkVolumeProperty> volumeProperty1;
+    volumeProperty1->SetShade(1);
+    volumeProperty1->SetInterpolationTypeToLinear();
+    
+    vtkNew<vtkColorTransferFunction> ctf1;
+    // ctf->AddRGBPoint(90, 0.2, 0.29, 1);
+    // ctf->AddRGBPoint(157.091, 0.87, 0.87, 0.87);
+    // ctf->AddRGBPoint(250, 0.7, 0.015, 0.15);
+    
+    ctf1->AddRGBPoint(0, 0, 0, 0);
+    ctf1->AddRGBPoint(255*67.0106/3150.0, 0.54902, 0.25098, 0.14902);
+    ctf1->AddRGBPoint(255*251.105/3150.0, 0.882353, 0.603922, 0.290196);
+    ctf1->AddRGBPoint(255*439.291/3150.0, 1, 0.937033, 0.954531);
+    ctf1->AddRGBPoint(255*3071/3150.0, 0.827451, 0.658824, 1);
+    
+    
+    // vtkNew<vtkPiecewiseFunction> pwf;
+    // pwf->AddPoint(0, 0.0);
+    // pwf->AddPoint(7000, 1.0);
+    
+    vtkNew<vtkPiecewiseFunction> pwf1;
+    pwf1->AddPoint(0, 0);
+    pwf1->AddPoint(255*(67.0106+tweak)/3150.0, 0);
+    pwf1->AddPoint(255*(251.105+tweak)/3150.0, 0.3);
+    pwf1->AddPoint(255*(439.291+tweak)/3150.0, 0.5);
+    pwf1->AddPoint(255*3071/3150.0, 0.616071);
+    
+    volumeProperty1->SetColor(ctf1.GetPointer());
+    volumeProperty1->SetScalarOpacity(pwf1.GetPointer());
+    
+    vtkNew<vtkVolume> volume1;
+    volume1->SetMapper(volumeMapper1.GetPointer());
+    volume1->SetProperty(volumeProperty1.GetPointer());
+    
+    renderer->SetBackground2(0.2,0.3,0.4);
+    renderer->SetBackground(0.1,0.1,0.1);
+    renderer->GradientBackgroundOn();
+    renderer->AddVolume(volume1.GetPointer());
+    renderer->ResetCamera();
+    renderer->GetActiveCamera()->Zoom(0.7);
 }
 
 
