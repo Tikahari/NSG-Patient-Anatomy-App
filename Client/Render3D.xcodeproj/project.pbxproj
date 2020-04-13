@@ -308,7 +308,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T77RNNM7G3;
+				DEVELOPMENT_TEAM = Y3QJ47SND3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Frameworks,
@@ -320,7 +320,7 @@
 					"$(inherited)",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/Frameworks/vtk.Framework;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonas.Render3D;
+				PRODUCT_BUNDLE_IDENTIFIER = "tikaharik-gmail.com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Render3D/Render3D-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -335,7 +335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T77RNNM7G3;
+				DEVELOPMENT_TEAM = Y3QJ47SND3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Frameworks,
@@ -347,7 +347,7 @@
 					"$(inherited)",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/Frameworks/vtk.Framework;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jonas.Render3D;
+				PRODUCT_BUNDLE_IDENTIFIER = "tikaharik-gmail.com";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Render3D/Render3D-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
