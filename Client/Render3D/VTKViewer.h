@@ -13,14 +13,16 @@
   // Forward declarations
   class vtkIOSRenderWindow;
   class vtkIOSRenderWindowInteractor;
-
+  class vtkRenderer;
   // Type declarations
   typedef vtkIOSRenderWindow *vtkIOSRenderWindowRef;
   typedef vtkIOSRenderWindowInteractor *vtkIOSRenderWindowInteractorRef;
+    typedef vtkRenderer *vtkRendererRef;
 #else
   // Type declarations
   typedef void *vtkIOSRenderWindowRef;
   typedef void *vtkIOSRenderWindowInteractorRef;
+    typedef void *vtkRendererRef;
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VTKViewer : GLKViewController{
     @private
     vtkIOSRenderWindowRef _myVTKRenderWindow;
+    vtkRendererRef _myRenderer;
 }
 
 @property (nonatomic, strong) UIWindow *window;
@@ -35,9 +38,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (vtkIOSRenderWindowRef)getVTKRenderWindow;
 - (void)setVTKRenderWindow:(vtkIOSRenderWindowRef)theVTKRenderWindow;
 
+-(vtkRendererRef)getVTKRenderer;
+-(void)setVTKRenderer:(vtkRendererRef) theRenderer;
+
 - (vtkIOSRenderWindowInteractorRef)getInteractor;
 
 - (void)setupPipeline;
+
+- (void)addToRenderer:(NSString*)filename;
 
 @end
 
