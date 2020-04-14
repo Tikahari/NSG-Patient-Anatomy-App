@@ -9,11 +9,12 @@
 import UIKit
 import SceneKit
 
+
 let IP_target = "192.168.1.138"
 let PORT_target = "8000"
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -21,12 +22,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
         print("did load")
     }
     
     
-
-
+    
+    
     @IBAction func submitAction(_ sender: Any) {
         //grab username from field
         let username = usernameField.text;
@@ -45,29 +47,29 @@ class ViewController: UIViewController {
         request.httpBody = bodyData.data(using: String.Encoding.utf8)
         //create a task o
         var task = URLSession.shared.dataTask(with: request as URLRequest){ data, response, error in
-           if let httpResponse = response as? HTTPURLResponse {
-                      if(httpResponse.statusCode == 200){
-                        DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "loginSegue", sender: self)
-                        }
+            if let httpResponse = response as? HTTPURLResponse {
+                if(httpResponse.statusCode == 200){
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "loginSegue", sender: self)
+                    }
+                    
+                }
+                else{
+                    DispatchQueue.main.async {
                         
-                      }
-                      else{
-                        DispatchQueue.main.async {
-                            
-                            let alert = UIAlertController(title: "Alert", message: "Incorrect username or password", preferredStyle: .alert)
-                            let dismissAction = UIAlertAction(title: "Dismiss", style: .default){ (action:UIAlertAction) in
-                                alert.dismiss(animated: true, completion: nil)
-                            }
-                            alert.addAction(dismissAction)
-                            self.present(alert, animated: false, completion: nil)
+                        let alert = UIAlertController(title: "Alert", message: "Incorrect username or password", preferredStyle: .alert)
+                        let dismissAction = UIAlertAction(title: "Dismiss", style: .default){ (action:UIAlertAction) in
+                            alert.dismiss(animated: true, completion: nil)
                         }
+                        alert.addAction(dismissAction)
+                        self.present(alert, animated: false, completion: nil)
+                    }
+                    
+                }
+            }
             
-                        }
-           }
-   
         }
         task.resume()
-}
+    }
 }
 

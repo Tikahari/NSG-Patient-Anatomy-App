@@ -9,3 +9,5 @@ xcuserdata/
 *.pbxuser
 *.perspective
 *.perspectivev3
+
+__pycache__/*
