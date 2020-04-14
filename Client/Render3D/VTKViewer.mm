@@ -125,7 +125,10 @@
     NSString *basePath = paths.firstObject;
     std::string fname([basePath UTF8String]);
     NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"nii.gz"];
-    fname = ([filename UTF8String]);
+    // from path
+    fname = ([path UTF8String]);
+    // from array
+//    fname = ([filename UTF8String]);
     NSLog(@"file to be used %s", fname.c_str());
     //    fname = "/Users/Khanal/Desktop/Tikahari/Downloads/freesurfer_outputs/mri/aparc.a2009s+aseg.nii";
     //    vtkNew<vtkNrrdReader> mi;
@@ -152,11 +155,11 @@
        // ctf->AddRGBPoint(157.091, 0.87, 0.87, 0.87);
        // ctf->AddRGBPoint(250, 0.7, 0.015, 0.15);
        
-       ctf->AddRGBPoint(0, 0, 0, 0);
-       ctf->AddRGBPoint(255*67.0106/3150.0, 0.54902, 0.25098, 0.14902);
-       ctf->AddRGBPoint(255*251.105/3150.0, 0.882353, 0.603922, 0.290196);
-       ctf->AddRGBPoint(255*439.291/3150.0, 1, 0.937033, 0.954531);
-       ctf->AddRGBPoint(255*3071/3150.0, 0.827451, 0.658824, 1);
+//       ctf->AddRGBPoint(0, 0, 0, 0);
+//       ctf->AddRGBPoint(255*67.0106/3150.0, 0.54902, 0.25098, 0.14902);
+//       ctf->AddRGBPoint(255*251.105/3150.0, 0.882353, 0.603922, 0.290196);
+//       ctf->AddRGBPoint(255*439.291/3150.0, 1, 0.937033, 0.954531);
+//       ctf->AddRGBPoint(255*3071/3150.0, 0.827451, 0.658824, 1);
        
        
        // vtkNew<vtkPiecewiseFunction> pwf;
@@ -170,8 +173,8 @@
        pwf->AddPoint(255*(251.105+tweak)/3150.0, 0.3);
        pwf->AddPoint(255*(439.291+tweak)/3150.0, 0.5);
        pwf->AddPoint(255*3071/3150.0, 0.616071);
-       
-       volumeProperty->SetColor(ctf.GetPointer());
+//
+//       volumeProperty->SetColor(ctf.GetPointer());
        volumeProperty->SetScalarOpacity(pwf.GetPointer());
        
        vtkNew<vtkVolume> volume;
@@ -213,17 +216,21 @@
     NSError *error = nil;
     NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:&error];
     NSLog(@"files %@", files);
-    NSArray * files_found = [self recursivePathsForResourcesOfType:@"gz" inDirectory:resourcePath];
+    NSArray * files_found = [self recursivePathsForResourcesOfType:@"nii" inDirectory:resourcePath];
     NSLog(@"files found %@", files_found);
     
     printf("completed file paths\n");
-    NSInteger count = 0;
-    for(NSString *nii in files_found){
-        if (count < 10) {
-        [self addToRenderer: nii];
-        }
-        count++;
-    }
+    
+
+    [self addToRenderer:@"255.0_label"];
+//    //add multiple volumes
+//    NSInteger count = 0;
+//    for(NSString *nii in files_found){
+//        if (count < 10) {
+//        [self addToRenderer: nii];
+//        }
+//        count++;
+//    }
 }
 
 

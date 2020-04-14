@@ -18,6 +18,13 @@
 		7A07060D244417C300AD3675 /* circlular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07060C244417C300AD3675 /* circlular.swift */; };
 		7A07060F24443B5D00AD3675 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07060E24443B5D00AD3675 /* Selection.swift */; };
 		7A8FB34624406D630049DBB7 /* VTKViewer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7A8FB34524406D630049DBB7 /* VTKViewer.mm */; };
+		7AA02AF024458CF200E235F6 /* 2.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AEF24458CF200E235F6 /* 2.0_label.nii.gz */; };
+		7AA02AF224458CFE00E235F6 /* cerebellum.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AF124458CFE00E235F6 /* cerebellum.nii */; };
+		7AA02AF424458ECF00E235F6 /* c.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AF324458ECF00E235F6 /* c.nii */; };
+		7AA02AF624458F9000E235F6 /* b.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AF524458F9000E235F6 /* b.nii */; };
+		7AA02AF92445914300E235F6 /* e.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AF72445914300E235F6 /* e.nii */; };
+		7AA02AFA2445914300E235F6 /* f.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AF82445914300E235F6 /* f.nii */; };
+		7AA02AFC2445917800E235F6 /* d.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7AA02AFB2445917800E235F6 /* d.nii */; };
 		7AB560342445507100D7D18B /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AB560332445507100D7D18B /* icon.jpg */; };
 		7AB56038244550F600D7D18B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AB56036244550F600D7D18B /* Main.storyboard */; };
 		7AB56097244558BE00D7D18B /* 14.0_label.nii.gz in Resources */ = {isa = PBXBuildFile; fileRef = 7AB56069244558BC00D7D18B /* 14.0_label.nii.gz */; };
@@ -132,6 +139,13 @@
 		7A8FB34324406D630049DBB7 /* Render3D-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Render3D-Bridging-Header.h"; sourceTree = "<group>"; };
 		7A8FB34424406D630049DBB7 /* VTKViewer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VTKViewer.h; sourceTree = "<group>"; };
 		7A8FB34524406D630049DBB7 /* VTKViewer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VTKViewer.mm; sourceTree = "<group>"; };
+		7AA02AEF24458CF200E235F6 /* 2.0_label.nii.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = 2.0_label.nii.gz; path = Render3D/labels/2.0_label.nii.gz; sourceTree = "<group>"; };
+		7AA02AF124458CFE00E235F6 /* cerebellum.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = cerebellum.nii; path = Render3D/labels/cerebellum.nii; sourceTree = "<group>"; };
+		7AA02AF324458ECF00E235F6 /* c.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = c.nii; path = Render3D/labels/c.nii; sourceTree = "<group>"; };
+		7AA02AF524458F9000E235F6 /* b.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = b.nii; path = Render3D/labels/b.nii; sourceTree = "<group>"; };
+		7AA02AF72445914300E235F6 /* e.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = e.nii; path = Render3D/labels/e.nii; sourceTree = "<group>"; };
+		7AA02AF82445914300E235F6 /* f.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = f.nii; path = Render3D/labels/f.nii; sourceTree = "<group>"; };
+		7AA02AFB2445917800E235F6 /* d.nii */ = {isa = PBXFileReference; lastKnownFileType = file; name = d.nii; path = Render3D/labels/d.nii; sourceTree = "<group>"; };
 		7AB560332445507100D7D18B /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = icon.jpg; path = icon/icon.jpg; sourceTree = "<group>"; };
 		7AB56037244550F600D7D18B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Render3D/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7AB56069244558BC00D7D18B /* 14.0_label.nii.gz */ = {isa = PBXFileReference; lastKnownFileType = archive.gzip; name = 14.0_label.nii.gz; path = Render3D/labels/14.0_label.nii.gz; sourceTree = "<group>"; };
@@ -225,6 +239,13 @@
 		DDA82DA423F07A1A0043A275 = {
 			isa = PBXGroup;
 			children = (
+				7AA02AFB2445917800E235F6 /* d.nii */,
+				7AA02AF72445914300E235F6 /* e.nii */,
+				7AA02AF82445914300E235F6 /* f.nii */,
+				7AA02AF524458F9000E235F6 /* b.nii */,
+				7AA02AF324458ECF00E235F6 /* c.nii */,
+				7AA02AF124458CFE00E235F6 /* cerebellum.nii */,
+				7AA02AEF24458CF200E235F6 /* 2.0_label.nii.gz */,
 				7AB5606B244558BC00D7D18B /* 3.0_label.nii.gz */,
 				7AB56081244558BD00D7D18B /* 4.0_label.nii.gz */,
 				7AB56090244558BE00D7D18B /* 5.0_label.nii.gz */,
@@ -410,8 +431,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA02AFA2445914300E235F6 /* f.nii in Resources */,
 				7AB56097244558BE00D7D18B /* 14.0_label.nii.gz in Resources */,
 				7AB56098244558BE00D7D18B /* bvecs in Resources */,
+				7AA02AF624458F9000E235F6 /* b.nii in Resources */,
 				7AB56099244558BE00D7D18B /* 3.0_label.nii.gz in Resources */,
 				7AB5609A244558BE00D7D18B /* 31.0_label.nii.gz in Resources */,
 				7AB5609B244558BE00D7D18B /* 24.0_label.nii.gz in Resources */,
@@ -427,6 +450,7 @@
 				7AB560A5244558BE00D7D18B /* 30.0_label.nii.gz in Resources */,
 				7AB560A6244558BE00D7D18B /* 47.0_label.nii.gz in Resources */,
 				7AB560A7244558BE00D7D18B /* 15.0_label.nii.gz in Resources */,
+				7AA02AF92445914300E235F6 /* e.nii in Resources */,
 				7AB560A8244558BE00D7D18B /* 18.0_label.nii.gz in Resources */,
 				7AB560A9244558BE00D7D18B /* 58.0_label.nii.gz in Resources */,
 				7AB560AA244558BE00D7D18B /* 63.0_label.nii.gz in Resources */,
@@ -444,6 +468,9 @@
 				7AB560B7244558BE00D7D18B /* 51.0_label.nii.gz in Resources */,
 				7AB560B8244558BE00D7D18B /* 43.0_label.nii.gz in Resources */,
 				7AB560B9244558BE00D7D18B /* 77.0_label.nii.gz in Resources */,
+				7AA02AF424458ECF00E235F6 /* c.nii in Resources */,
+				7AA02AF024458CF200E235F6 /* 2.0_label.nii.gz in Resources */,
+				7AA02AFC2445917800E235F6 /* d.nii in Resources */,
 				7AB560BA244558BE00D7D18B /* 252.0_label.nii.gz in Resources */,
 				7AB560BB244558BE00D7D18B /* 254.0_label.nii.gz in Resources */,
 				7AB560BC244558BE00D7D18B /* 28.0_label.nii.gz in Resources */,
@@ -454,6 +481,7 @@
 				7AB560C1244558BE00D7D18B /* 11.0_label.nii.gz in Resources */,
 				7AB560C2244558BE00D7D18B /* 16.0_label.nii.gz in Resources */,
 				7AB560C3244558BE00D7D18B /* 10.0_label.nii.gz in Resources */,
+				7AA02AF224458CFE00E235F6 /* cerebellum.nii in Resources */,
 				7AB560C4244558BE00D7D18B /* 85.0_label.nii.gz in Resources */,
 				7AB56038244550F600D7D18B /* Main.storyboard in Resources */,
 				7AB560342445507100D7D18B /* icon.jpg in Resources */,
