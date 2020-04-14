@@ -51,7 +51,6 @@
                                 </state>
                                 <connections>
                                     <action selector="submitAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oH8-JS-QWK"/>
-                                    <segue destination="OiC-kB-4R1" kind="show" id="uYg-gu-3fn"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  NSG Patient Anatomy App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3i5-1b-Ly2">
@@ -73,11 +72,12 @@
                     <connections>
                         <outlet property="passwordField" destination="Sjq-Jb-98N" id="gSh-lv-fZJ"/>
                         <outlet property="usernameField" destination="Lzc-OS-eVx" id="gYV-XI-cWv"/>
+                        <segue destination="OiC-kB-4R1" kind="show" identifier="loginSegue" id="27Q-ZY-zKc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="94.419642857142847"/>
+            <point key="canvasLocation" x="164" y="128"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="1TQ-J3-D2b">
