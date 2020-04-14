@@ -20,7 +20,7 @@ class Progress: UIViewController {
         super.viewDidLoad()
         print("from login", fromLogin)
         if (fromLogin) {
-            interval = 8.0
+            interval = 5.0
             delay = 1.0
         }
         else{
