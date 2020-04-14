@@ -56,6 +56,18 @@ class ViewController: UIViewController {
                         }
                         
                       }
+                      else{
+                        DispatchQueue.main.async {
+                            
+                            let alert = UIAlertController(title: "Alert", message: "Incorrect username or password", preferredStyle: .alert)
+                            let dismissAction = UIAlertAction(title: "Dismiss", style: .default){ (action:UIAlertAction) in
+                                alert.dismiss(animated: true, completion: nil)
+                            }
+                            alert.addAction(dismissAction)
+                            self.present(alert, animated: false, completion: nil)
+                        }
+            
+                        }
            }
    
         }
