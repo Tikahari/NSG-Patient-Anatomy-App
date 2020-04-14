@@ -115,9 +115,10 @@ def runTask(task):
             subprocess.run(["recon-all","-i",niiFile,"-subject", subject, "-all"],stdout=f)
         except:
             print('failed')
-            except:
             try:
-                shutil.rmtree(settings.FREESURFER_SUBJECT_PATH + subject)
+                #free surfer doesn't like it when you try to give new data for the same subject, so we delete the subject file here
+                #I didn't really test this yet....
+                shutil.rmtree(settings.FREESURFER_SUBJECT_PATH + subject)#
             except:
                 print('could not delete freesurfer subject file')
             task.status = 'recon_all failed'
@@ -128,17 +129,19 @@ def runTask(task):
             return
     #print('recon-all -i' + ' \'' + getNii(extractPath + '/output') + '\' -subject ' + str(patientName) + '_' + str(studyName) + '_' + str(studyID) + ' -all')
     else:
+        #in case of random failure below is active
         runningCheck = settings.FREESURFER_SUBJECT_PATH + subject + '/scripts/IsRunning.lh+rh'
         if os.path.exists(runningCheck):
             os.remove(runningCheck)
         f = open(outputPath + 'free_surfer_output.txt', "w+")
         try:
             print('restarting recon-all')
+            #sucks to restart completely. With more time it would be possible to check the log and set up a continuation
             subprocess.run(["recon-all", "-subject", subject, "-all"],stdout=f)
         except:
             print('failed')
             try:
-                shutil.rmtree(settings.FREESURFER_SUBJECT_PATH + subject)
+                shutil.rmtree(settings.FREESURFER_SUBJECT_PATH + subject)#same idea as above
             except:
                 print('could not delete freesurfer subject file')
             task.status = 'recon_all failed'
@@ -147,12 +150,12 @@ def runTask(task):
             task.recon_started = False
             task.save()
             return
-
+     #blow code is commented out for debug purposes, should be uncommented in release verison 
     #task.isDone = True
     #task.isProcessing = False
     #task.isAvailable = True
     #task.save()
-    #sendProcessedData(task)
+    #sendProcessedData(task)#update medicalServer with the data
 
 
 def ManageJobs():
