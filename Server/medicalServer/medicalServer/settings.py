@@ -24,14 +24,20 @@ SECRET_KEY = '1=6kpfb!dx-o(j7cf&#n(_if!q7slk%hnd5ec3--8@m(ly7sa='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '192.168.1.37',
+]
 
-ALLOWED_HOSTS = ["192.168.1.138"]
-
+APPEND_SLASH = True
 
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
+    'updateStudy.apps.UpdatestudyConfig',
     'studies.apps.StudiesConfig',
     'login.apps.LoginConfig',
     'django.contrib.admin',
@@ -124,11 +130,19 @@ STATIC_URL = '/static/'
 
 LOCAL_FILE_DIR='/home/michael/results/'
 
+UNPROC_DATA_SAVE_DIR = '/home/michael/temp/dataToSend/'
+PROC_DATA_SAVE_DIR='/home/michael/temp/studies/'
+MEDIA_ROOT = UNPROC_DATA_SAVE_DIR
+PROCESSING_SERVER = 'http://localhost:9000'
+PROCESSING_SERVER_TOKEN = '399de70740d71330871384bf0b7f8ea938c7c986'
+
+
 AUTH_USER_MODEL = 'login.User'
 
-
 REST_FRAMEWORK = {
-'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework.authentication.SessionAuthentication',
-),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ]
 }
