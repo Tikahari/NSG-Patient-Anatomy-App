@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uJA-K3-6ap">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uJA-K3-6ap">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -151,7 +151,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Hdx-iM-zkN" kind="show" id="6hH-o9-ERx"/>
+                                    <action selector="proceduresClicked:" destination="HbC-Ou-74u" eventType="touchUpInside" id="LEf-Ar-Sb5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ise-1b-jA6">
@@ -163,7 +163,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Hdx-iM-zkN" kind="show" id="W73-vO-JQL"/>
+                                    <action selector="templateClicked:" destination="HbC-Ou-74u" eventType="touchUpInside" id="BXH-xu-DGE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRN-Oz-WvQ">
@@ -175,7 +175,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Hdx-iM-zkN" kind="show" id="otF-1B-7WN"/>
+                                    <action selector="patientHeadScanClicked:" destination="HbC-Ou-74u" eventType="touchUpInside" id="wT4-un-7kM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -184,7 +184,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="oVZ-Kb-lLy">
                         <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4n3-mg-c7s">
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4n3-mg-c7s">
                             <rect key="frame" x="176" y="4" width="62" height="36"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -198,6 +198,9 @@
                         <outlet property="patient" destination="XRN-Oz-WvQ" id="XNg-AG-moU"/>
                         <outlet property="procedures" destination="iEg-y4-UFg" id="Ecw-Tn-Nlo"/>
                         <outlet property="template" destination="Ise-1b-jA6" id="huY-4X-YcG"/>
+                        <segue destination="Hdx-iM-zkN" kind="show" identifier="toProgressFromTemplate" id="r8J-E8-1YY"/>
+                        <segue destination="Hdx-iM-zkN" kind="show" identifier="toProgressFromHeadScan" id="mHr-Fv-JaQ"/>
+                        <segue destination="Hdx-iM-zkN" kind="show" identifier="toProgressFromProcedures" id="uuU-J8-ZUE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x0F-3T-hJh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -212,7 +215,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-45-fv4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="           Patient Headscan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nX-45-fv4" userLabel="Patient Headscan">
                                 <rect key="frame" x="0.0" y="757" width="414" height="139"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.84855512310000003" green="0.93662444639999998" blue="0.96130555870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -248,7 +251,7 @@
                         </button>
                     </navigationItem>
                     <connections>
-                        <outlet property="headscanName" destination="MhX-IG-EmH" id="JQW-YW-XFZ"/>
+                        <outlet property="titleLabel" destination="1nX-45-fv4" id="heU-lN-8iF"/>
                     </connections>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6O9-MG-tNx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -318,7 +321,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="6hH-o9-ERx"/>
+        <segue reference="r8J-E8-1YY"/>
         <segue reference="bis-Nc-EgZ"/>
         <segue reference="iQq-yx-mn9"/>
     </inferredMetricsTieBreakers>

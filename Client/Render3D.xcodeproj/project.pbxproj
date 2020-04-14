@@ -14,7 +14,6 @@
 		7A0705FF2443C65F00AD3675 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0705FE2443C65F00AD3675 /* OpenGLES.framework */; };
 		7A0706012443C66600AD3675 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0706002443C66600AD3675 /* QuartzCore.framework */; };
 		7A0706032443C6A800AD3675 /* vtk in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A0706022443C6A800AD3675 /* vtk */; };
-		7A0706052443C72C00AD3675 /* aseg.nrrd in Resources */ = {isa = PBXBuildFile; fileRef = 7A0706042443C72C00AD3675 /* aseg.nrrd */; };
 		7A0706072443C73900AD3675 /* aparc.DKTatlas+aseg.nii in Resources */ = {isa = PBXBuildFile; fileRef = 7A0706062443C73900AD3675 /* aparc.DKTatlas+aseg.nii */; };
 		7A0706092444095700AD3675 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0706082444095700AD3675 /* Progress.swift */; };
 		7A07060D244417C300AD3675 /* circlular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07060C244417C300AD3675 /* circlular.swift */; };
@@ -348,7 +347,6 @@
 				7A070613244446B400AD3675 /* IMG_0378-3.jpg in Resources */,
 				7A07064E2444C3EB00AD3675 /* 50.0_label.nii.gz in Resources */,
 				7A0706482444C3EB00AD3675 /* 18.0_label.nii.gz in Resources */,
-				7A0706052443C72C00AD3675 /* aseg.nrrd in Resources */,
 				DDA82DBD23F07A200043A275 /* LaunchScreen.storyboard in Resources */,
 				7A0706572444C3EB00AD3675 /* 13.0_label.nii.gz in Resources */,
 				7A07064D2444C3EB00AD3675 /* 49.0_label.nii.gz in Resources */,

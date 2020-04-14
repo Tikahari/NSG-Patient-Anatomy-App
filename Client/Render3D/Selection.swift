@@ -27,7 +27,27 @@ class Selection: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func templateClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "toProgressFromTemplate", sender: self)
+    }
+    @IBAction func patientHeadScanClicked(_ sender: Any) {
+         self.performSegue(withIdentifier: "toProgressFromHeadScan", sender: self)
+    }
+    @IBAction func proceduresClicked(_ sender: Any) {
+         self.performSegue(withIdentifier: "toProgressFromProcedures", sender: self)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProgressFromTemplate", let vc = segue.destination as? Progress {
+            vc.buttonClicked = "Template"
+        }
+        else if segue.identifier == "toProgressFromHeadScan", let vc = segue.destination as? Progress {
+            vc.buttonClicked = "Patient Headscan"
+        }
+        else if segue.identifier == "toProgressFromProcedures", let vc = segue.destination as? Progress {
+            vc.buttonClicked = "Procedures"
+        }
+    }
     /*
      // MARK: - Navigation
      

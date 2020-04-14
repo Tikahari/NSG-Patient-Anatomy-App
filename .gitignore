@@ -4,6 +4,7 @@ build/
 
 
 project.xcworkspace/
+Client/Render3D.xcodeproj/project.pbxproj
 xcuserdata/
 
 *.pbxuser
