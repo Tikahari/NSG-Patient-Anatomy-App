@@ -71,5 +71,11 @@ class ViewController: UIViewController {
         }
         task.resume()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loginSegue", let vc = segue.destination as? Progress {
+            vc.fromLogin = true
+        }
+    }
+    
 }
 

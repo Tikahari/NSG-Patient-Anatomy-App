@@ -13,9 +13,21 @@ class Progress: UIViewController {
     
     @IBOutlet var progressCircle: circlular!
     var buttonClicked : String = ""
+    var fromLogin = false
+    var interval = 0.0
+    var delay = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
-        let timer = Timer.scheduledTimer(timeInterval: 7.0, target: self, selector: #selector(selection), userInfo: nil, repeats: false)
+        print("from login", fromLogin)
+        if (fromLogin) {
+            interval = 8.0
+            delay = 1.0
+        }
+        else{
+            interval = 45.0
+            delay = 2.0
+        }
+        let timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(selection), userInfo: nil, repeats: false)
         print(buttonClicked)
         let rgbColor = UIColor(
             red: 30.0 / 255,
@@ -27,18 +39,15 @@ class Progress: UIViewController {
         progressCircle.trackColor = UIColor.red
         
         progressCircle.layer1Color = UIColor.white
-        //animation speed
-//        progressCircle.layer.speed = 0.05
-        self.perform(#selector(progress), with: nil, afterDelay: 2.0)
+        self.perform(#selector(progress), with: nil, afterDelay: 0.5)
     }
     
     @objc func selection(){
         self.performSegue(withIdentifier: "toSelection", sender: self)
     }
     
-    @objc func progress(){
-        progressCircle.setProgress(duration: 5.0, value: 1)
-//        self.performSegue(withIdentifier: "toSelection", sender: self)
+    @objc func progress(duration: TimeInterval){
+        progressCircle.setProgress(duration: interval, value: 1)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

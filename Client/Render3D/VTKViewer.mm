@@ -106,7 +106,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = paths.firstObject;
     std::string fname([basePath UTF8String]);
-    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"nii"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"nii.gz"];
     fname = ([path UTF8String]);
     //    fname = "/Users/Khanal/Desktop/Tikahari/Downloads/freesurfer_outputs/mri/aparc.a2009s+aseg.nii";
     //    vtkNew<vtkNrrdReader> mi;
@@ -188,7 +188,7 @@
     vtkNew<vtkRenderer> renderer;
     renWin->AddRenderer(renderer.Get());
     [self setVTKRenderer:renderer.Get()];
-    [self addToRenderer:@"aparc.DKTatlas+aseg"];
+    [self addToRenderer:@"2.0_label"];
     
 //    vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
     
@@ -558,6 +558,5 @@
     // Display the buffer
     [(GLKView *)self.view display];
 }
-
 
 @end

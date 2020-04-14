@@ -1,3 +1,0 @@
-/home/tkhanal/Desktop/NSG-Patient-Anatomy-App/TK_Ubuntu/DICOM_test/build/CMakeFiles/rebuild_cache.dir
-/home/tkhanal/Desktop/NSG-Patient-Anatomy-App/TK_Ubuntu/DICOM_test/build/CMakeFiles/dicom.dir
-/home/tkhanal/Desktop/NSG-Patient-Anatomy-App/TK_Ubuntu/DICOM_test/build/CMakeFiles/edit_cache.dir
