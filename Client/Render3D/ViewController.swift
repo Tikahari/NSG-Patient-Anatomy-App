@@ -9,24 +9,65 @@
 import UIKit
 import SceneKit
 
+let IP_target = "192.168.1.138"
+let PORT_target = "8000"
 
 class ViewController: UIViewController {
+
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
     
-    @IBOutlet var submit: UIButton!
-    @IBOutlet weak var sceneView: SCNView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        submit.layer.cornerRadius = 10
         print("did load")
     }
+    
+    
 
 
-//    @IBAction func onSubmit(_ sender: Any) {
-//        let VC = self.storyboard?.instantiateViewController(withIdentifier: "progress") as! Progress
-//        self.present(VC, animated: true, completion: nil)
-//    }
-
+    @IBAction func submitAction(_ sender: Any) {
+        //grab username from field
+        let username = usernameField.text;
+        
+        //grab password from field
+        let password = passwordField.text;
+        
+        //create a string dict from the username and password
+        let params = ["username":username, "password": password] as! Dictionary<String, String>
+        
+        //create a urlrequest type, passing in the url to the local server
+        let request = NSMutableURLRequest(url: NSURL(string: "http://192.168.1.138:8000/login?username")! as URL)
+        let bodyData = "username=" + username! + "&password=" + password!;
+        //set the method to "POST"
+        request.httpMethod = "POST"
+        request.httpBody = bodyData.data(using: String.Encoding.utf8)
+        //create a task o
+        var task = URLSession.shared.dataTask(with: request as URLRequest){ data, response, error in
+           if let httpResponse = response as? HTTPURLResponse {
+                      if(httpResponse.statusCode == 200){
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "loginSegue", sender: self)
+                        }
+                        
+                      }
+                      else{
+                        DispatchQueue.main.async {
+                            
+                            let alert = UIAlertController(title: "Alert", message: "Incorrect username or password", preferredStyle: .alert)
+                            let dismissAction = UIAlertAction(title: "Dismiss", style: .default){ (action:UIAlertAction) in
+                                alert.dismiss(animated: true, completion: nil)
+                            }
+                            alert.addAction(dismissAction)
+                            self.present(alert, animated: false, completion: nil)
+                        }
+            
+                        }
+           }
+   
+        }
+        task.resume()
+}
 }
 
