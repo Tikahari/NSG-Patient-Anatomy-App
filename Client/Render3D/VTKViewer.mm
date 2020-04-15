@@ -48,16 +48,27 @@
 #include "vtkRenderer.h"
 #include "vtkTextMapper.h"
 #include "vtkTextProperty.h"
-
+#include <unordered_map>
+#include <tuple>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 #include <deque>
-
+#include <vector>
 /* 2 or 3 -- needs to match VTK version */
 #define GL_ES_VERSION 3
+
 
 @interface VTKViewer (){
     NSString* titleText;
 }
- @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) IBOutlet UITextField *segmentNumber;
+
+@property (strong, nonatomic) NSString* LUTPATH;
+
 
 @property (strong, nonatomic) EAGLContext *context;
 - (void)tearDownGL;
@@ -97,96 +108,198 @@
 
 -(vtkRenderer *)getVTKRenderer
 {
-  return _myRenderer;
+    return _myRenderer;
 }
 
-- (NSArray *)recursivePathsForResourcesOfType:(NSString *)type inDirectory:(NSString *)directoryPath{
-
-    NSMutableArray *filePaths = [[NSMutableArray alloc] init];
-    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath:directoryPath];
-
-    NSString *filePath;
-
-    while ((filePath = [enumerator nextObject]) != nil){
-        NSLog(@"filePath %@", filePath);
-        if (!type || [[filePath pathExtension] isEqualToString:type]){
-            NSLog(@"correct type");
-            [filePaths addObject:[directoryPath stringByAppendingPathComponent:filePath]];
-        }
-    }
-
-    return filePaths;
-}
-
-- (void)addToRenderer:(NSString*)filename {
-    vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = paths.firstObject;
-    std::string fname([basePath UTF8String]);
-    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"nii.gz"];
-    // from path
-    fname = ([path UTF8String]);
-    // from array
-//    fname = ([filename UTF8String]);
-    NSLog(@"file to be used %s", fname.c_str());
-    //    fname = "/Users/Khanal/Desktop/Tikahari/Downloads/freesurfer_outputs/mri/aparc.a2009s+aseg.nii";
-    //    vtkNew<vtkNrrdReader> mi;
+- (IBAction)reset:(id)sender {
+    NSString* filepath = [[NSBundle mainBundle] pathForResource:@"aparc.a2009s+aseg" ofType:@"nii"];
+    std::string fname = ([filepath UTF8String]);
     vtkNew<vtkNIFTIImageReader> mi;
     mi->SetFileName(fname.c_str());
     mi->Update();
-    
     double range[2];
     mi->GetOutput()->GetPointData()->GetScalars()->GetRange(range);
     
+    vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
     volumeMapper->SetInputConnection(mi->GetOutputPort());
-    
-    
-    
+    volumeMapper->SetInputConnection(mi->GetOutputPort());
     volumeMapper->SetAutoAdjustSampleDistances(1);
-       volumeMapper->SetSampleDistance(0.5);
-       
-       vtkNew<vtkVolumeProperty> volumeProperty;
-       volumeProperty->SetShade(1);
-       volumeProperty->SetInterpolationTypeToLinear();
-       
-       vtkNew<vtkColorTransferFunction> ctf;
-       // ctf->AddRGBPoint(90, 0.2, 0.29, 1);
-       // ctf->AddRGBPoint(157.091, 0.87, 0.87, 0.87);
-       // ctf->AddRGBPoint(250, 0.7, 0.015, 0.15);
-       
-//       ctf->AddRGBPoint(0, 0, 0, 0);
-//       ctf->AddRGBPoint(255*67.0106/3150.0, 0.54902, 0.25098, 0.14902);
-//       ctf->AddRGBPoint(255*251.105/3150.0, 0.882353, 0.603922, 0.290196);
-//       ctf->AddRGBPoint(255*439.291/3150.0, 1, 0.937033, 0.954531);
-//       ctf->AddRGBPoint(255*3071/3150.0, 0.827451, 0.658824, 1);
-       
-       
-       // vtkNew<vtkPiecewiseFunction> pwf;
-       // pwf->AddPoint(0, 0.0);
-       // pwf->AddPoint(7000, 1.0);
-       
-       double tweak = 80.0;
-       vtkNew<vtkPiecewiseFunction> pwf;
-       pwf->AddPoint(0, 0);
-       pwf->AddPoint(255*(67.0106+tweak)/3150.0, 0);
-       pwf->AddPoint(255*(251.105+tweak)/3150.0, 0.3);
-       pwf->AddPoint(255*(439.291+tweak)/3150.0, 0.5);
-       pwf->AddPoint(255*3071/3150.0, 0.616071);
+    volumeMapper->SetSampleDistance(0.5);
+    
+    vtkNew<vtkVolumeProperty> volumeProperty;
+    volumeProperty->SetShade(1);
+    volumeProperty->SetInterpolationTypeToLinear();
+    
+    vtkSmartPointer<vtkColorTransferFunction> ctf = vtkSmartPointer<vtkColorTransferFunction>::New();
+    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
+    
+    pwf->AddPoint(0,0);
+    pwf->AddPoint(2,.3);
+    pwf->AddPoint(3, .3);
+    pwf->AddPoint(40, .3);
+    pwf->AddPoint(41, .3);
+    pwf->AddPoint(42, .3);
+    pwf->AddPoint(255, .3);
+    pwf->AddPoint(256, .3);
+    //    pwf->AddPoint(99999, .8);
+    ctf->SetColorSpaceToRGB();
+    //assign colors
+    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
+    for (std::pair<std::string,std::tuple<int,int,int,int>> element : colorMap)
+    {
+        std::tuple<int,int,int,int> color = element.second;
+        if(std::get<0>(color) < 16000)
+        {
+            if(std::get<0>(color) == 2 || std::get<0>(color) == 41)
+                continue;
+            std::cout << element.first << "\t" << std::get<0>(color) << "\t" << std::get<1>(color) << "\t" << std::get<2>(color) << "\t" << std::get<3>(color) << "\t" << endl;
+            ctf->AddRGBPoint(std::get<0>(color),std::get<1>(color)/255.0,std::get<2>(color)/255.0,std::get<3>(color)/255.0);
+        }
+    }
+    
+    volumeProperty->SetColor(ctf.GetPointer());
+    volumeProperty->SetScalarOpacity(pwf.GetPointer());
+    //  set volume
+    vtkNew<vtkVolume> volume;
+    volume->SetMapper(volumeMapper.GetPointer());
+    volume->SetProperty(volumeProperty.GetPointer());
+    //    volumes.push_back(volume.GetPointer());
+    
+    vtkRenderer* myRenderer = [self getVTKRenderer];
+    myRenderer->SetBackground2(0.2,0.3,0.4);
+    myRenderer->SetBackground(0.1,0.1,0.1);
+    myRenderer->GradientBackgroundOn();
+    myRenderer->AddVolume(volume.GetPointer());
+    myRenderer->ResetCamera();
+    myRenderer->GetActiveCamera()->Zoom(0.7);
+    
+}
+
+- (IBAction)showRegion1:(id)sender {
+    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
+    vtkNew<vtkVolumeProperty> volumeProperty;
+    vtkNew<vtkVolume> volume;
+    volumeProperty->SetShade(1);
+    volumeProperty->SetInterpolationTypeToLinear();
+    vtkSmartPointer<vtkColorTransferFunction> ctf = vtkSmartPointer<vtkColorTransferFunction>::New();
+    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
+    
+    pwf->AddPoint(0,0);
+    //    pwf->AddPoint(2,.3);
+    //    pwf->AddPoint(3, .3);
+    //    pwf->AddPoint(40, .3);
+    //    pwf->AddPoint(41, .3);
+    //    pwf->AddPoint(42, .3);
+    //    pwf->AddPoint(255, .3);
+    pwf->AddPoint(256, .1);
+    ctf->SetColorSpaceToRGB();
+    
+    for (std::pair<std::string,std::tuple<int,int,int,int>> element : colorMap)
+    {
+        std::tuple<int,int,int,int> color = element.second;
+        if(std::get<0>(color) < 16000)
+        {
+            if(std::get<0>(color) != 2){
+                ctf->AddRGBPoint(std::get<0>(color),0,0,0);
+                continue;
+            }
+            std::cout << element.first << "\t" << std::get<0>(color) << "\t" << std::get<1>(color) << "\t" << std::get<2>(color) << "\t" << std::get<3>(color) << "\t" << endl;
+            ctf->AddRGBPoint(std::get<0>(color),std::get<1>(color)/255.0,std::get<2>(color)/255.0,std::get<3>(color)/255.0);
+        }
+    }
+    volumeProperty->SetColor(ctf.GetPointer());
+    volumeProperty->SetScalarOpacity(pwf.GetPointer());
+    volume->SetProperty(volumeProperty.GetPointer());
+    
+}
+
+
+- (std::unordered_map<std::string, std::tuple<int,int,int,int>>)processLUT{
+    NSString *lutP = [[NSBundle mainBundle] pathForResource:@"FreeSurferColorLUT" ofType:@"txt"];
+    std::string lut([lutP UTF8String]);
+    std::ifstream file(lut);
+    std::string str;
+    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap;
+    while (std::getline(file, str)) {
+        int label, red, green, blue;
+        std::string name;
+        std::stringstream ss(str);
+        ss >> label >> name >> red >> green >> blue;
+        colorMap.emplace(name,std::make_tuple(label,red,green,blue) );
+    }
+    return colorMap;
+}
+
+
+- (void)addToRenderer {
+    NSString* filepath = [[NSBundle mainBundle] pathForResource:@"aparc.DKTatlas+aseg" ofType:@"nii"];
+    // set file path
+//    if ([self->titleText isEqual:@"Template"]){
+//        NSLog(@"is template");
 //
-//       volumeProperty->SetColor(ctf.GetPointer());
-       volumeProperty->SetScalarOpacity(pwf.GetPointer());
-       
-       vtkNew<vtkVolume> volume;
-       volume->SetMapper(volumeMapper.GetPointer());
-       volume->SetProperty(volumeProperty.GetPointer());
-       
-     vtkRenderer* myRenderer = [self getVTKRenderer];
-       myRenderer->SetBackground2(0.2,0.3,0.4);
-       myRenderer->SetBackground(0.1,0.1,0.1);
-       myRenderer->GradientBackgroundOn();
-       myRenderer->AddVolume(volume.GetPointer());
-       myRenderer->ResetCamera();
+//    }
+//    else{
+//        NSLog(@"is patient");
+//        NSString* filepath =[[NSBundle mainBundle] pathForResource:@"aparc.a2009s+aseg" ofType:@"nii"];
+//    }
+    NSLog(@"file path %@", filepath);
+    
+    // from path
+    std::string fname([filepath UTF8String]);
+    vtkNew<vtkNIFTIImageReader> mi;
+    NSLog(@"Add %s to renderer", fname.c_str());
+    mi->SetFileName(fname.c_str());
+    mi->Update();
+    double range[2];
+    mi->GetOutput()->GetPointData()->GetScalars()->GetRange(range);
+    
+    vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
+    volumeMapper->SetInputConnection(mi->GetOutputPort());
+    volumeMapper->SetAutoAdjustSampleDistances(1);
+    volumeMapper->SetSampleDistance(0.5);
+    
+    vtkNew<vtkVolumeProperty> volumeProperty;
+    volumeProperty->SetShade(1);
+    volumeProperty->SetInterpolationTypeToLinear();
+    
+    vtkSmartPointer<vtkColorTransferFunction> ctf = vtkSmartPointer<vtkColorTransferFunction>::New();
+    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
+    
+    pwf->AddPoint(0,0);
+//    pwf->AddPoint(0, 0,0.999,0);
+    pwf->AddPoint(3, 0,0.9999,0);
+    pwf->AddPoint(4, 0.08,0,1);
+    pwf->AddPoint(5, 0,0,0);
+//    pwf->AddPoint(99999, 0.5);
+    ctf->SetColorSpaceToRGB();
+    // assign colors
+    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
+    for (std::pair<std::string,std::tuple<int,int,int,int>> element : colorMap)
+    {
+        std::tuple<int,int,int,int> color = element.second;
+        if(std::get<0>(color) < 16000)
+        {
+            if(std::get<0>(color) == 2 || std::get<0>(color) == 41)
+                continue;
+            std::cout << element.first << "\t" << std::get<0>(color) << "\t" << std::get<1>(color) << "\t" << std::get<2>(color) << "\t" << std::get<3>(color) << "\t" << endl;
+            ctf->AddRGBPoint(std::get<0>(color),std::get<1>(color)/255.0,std::get<2>(color)/255.0,std::get<3>(color)/255.0);
+        }
+    }
+    
+    volumeProperty->SetColor(ctf.GetPointer());
+    volumeProperty->SetScalarOpacity(pwf.GetPointer());
+    //  set volume
+    vtkNew<vtkVolume> volume;
+    volume->SetMapper(volumeMapper.GetPointer());
+    volume->SetProperty(volumeProperty.GetPointer());
+    //    volumes.push_back(volume.GetPointer());
+    
+    vtkRenderer* myRenderer = [self getVTKRenderer];
+    myRenderer->SetBackground2(0.2,0.3,0.4);
+    myRenderer->SetBackground(0.1,0.1,0.1);
+    myRenderer->GradientBackgroundOn();
+    myRenderer->AddVolume(volume.GetPointer());
+    myRenderer->ResetCamera();
     myRenderer->GetActiveCamera()->Zoom(0.7);
     
 }
@@ -210,27 +323,10 @@
     vtkNew<vtkRenderer> renderer;
     renWin->AddRenderer(renderer.Get());
     [self setVTKRenderer:renderer.Get()];
-    //get .nii.gz paths
-    NSString * resourcePath = [[NSBundle mainBundle] resourcePath];
-    NSLog(@" resource paths%@", resourcePath);
-    NSError *error = nil;
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:&error];
-    NSLog(@"files %@", files);
-    NSArray * files_found = [self recursivePathsForResourcesOfType:@"nii" inDirectory:resourcePath];
-    NSLog(@"files found %@", files_found);
-    
-    printf("completed file paths\n");
-    
 
-    [self addToRenderer:@"255.0_label"];
-//    //add multiple volumes
-//    NSInteger count = 0;
-//    for(NSString *nii in files_found){
-//        if (count < 10) {
-//        [self addToRenderer: nii];
-//        }
-//        count++;
-//    }
+    //set color map
+    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
+    [self addToRenderer];
 }
 
 

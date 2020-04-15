@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
     vtkIOSRenderWindowRef _myVTKRenderWindow;
     vtkRendererRef _myRenderer;
 }
-
 @property (nonatomic, strong) UIWindow *window;
 
 - (vtkIOSRenderWindowRef)getVTKRenderWindow;

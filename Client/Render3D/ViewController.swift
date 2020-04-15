@@ -10,8 +10,8 @@ import UIKit
 import SceneKit
 
 
-let IP_target = "192.168.1.138"
-let PORT_target = "8000"
+let IP_target = "108.83.161.83"
+let PORT_target = "8080"
 
 class ViewController: UIViewController {
     
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         let params = ["username":username, "password": password] as! Dictionary<String, String>
         
         //create a urlrequest type, passing in the url to the local server
-        let request = NSMutableURLRequest(url: NSURL(string: "http://192.168.1.138:8000/login?username")! as URL)
+        let request = NSMutableURLRequest(url: NSURL(string: "http://" + IP_target + ":" + PORT_target + "/login?username")! as URL)
         let bodyData = "username=" + username! + "&password=" + password!;
         //set the method to "POST"
         request.httpMethod = "POST"
