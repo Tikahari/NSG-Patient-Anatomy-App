@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.6)
+project(Test)
+set(VTK_DIR "/home/michael/VTK-build")
+find_package(VTK REQUIRED)
+include(${VTK_USE_FILE})
+add_executable(Test test.cxx)
+target_link_libraries(Test ${VTK_LIBRARIES})
