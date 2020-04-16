@@ -59,10 +59,13 @@
 /* 2 or 3 -- needs to match VTK version */
 #define GL_ES_VERSION 3
 
+vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
 
 @interface VTKViewer (){
     NSString* titleText;
 }
+@property (strong, nonatomic) IBOutlet UISlider *slider;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutlet UITextField *segmentNumber;
@@ -110,107 +113,48 @@
 {
     return _myRenderer;
 }
+- (IBAction)setOpacitySlider:(id)sender {
+    if([self.segmentNumber.text isEqual:@""]){
+        NSLog(@"empty segment");
+        return;
+    }
+    float myseg = [self.segmentNumber.text floatValue];
+    NSLog(@"segment number is %d", myseg);
+    NSLog(@"Get segment");
+    NSLog(@"opacity value %d", self.slider.value);
+    pwf->RemoveAllPoints();
+    pwf->AddPoint(0, 0);
+    pwf->AddPoint(myseg-1,0,0.9999,0);
+    pwf->AddPoint(myseg, self.slider.value,0,1);
+    pwf->AddPoint(myseg+1,0,0,0);
+    [self.segmentNumber resignFirstResponder];
+}
 
 - (IBAction)reset:(id)sender {
-    NSString* filepath = [[NSBundle mainBundle] pathForResource:@"aparc.a2009s+aseg" ofType:@"nii"];
-    std::string fname = ([filepath UTF8String]);
-    vtkNew<vtkNIFTIImageReader> mi;
-    mi->SetFileName(fname.c_str());
-    mi->Update();
-    double range[2];
-    mi->GetOutput()->GetPointData()->GetScalars()->GetRange(range);
-    
-    vtkNew<vtkOpenGLGPUVolumeRayCastMapper> volumeMapper;
-    volumeMapper->SetInputConnection(mi->GetOutputPort());
-    volumeMapper->SetInputConnection(mi->GetOutputPort());
-    volumeMapper->SetAutoAdjustSampleDistances(1);
-    volumeMapper->SetSampleDistance(0.5);
-    
-    vtkNew<vtkVolumeProperty> volumeProperty;
-    volumeProperty->SetShade(1);
-    volumeProperty->SetInterpolationTypeToLinear();
-    
-    vtkSmartPointer<vtkColorTransferFunction> ctf = vtkSmartPointer<vtkColorTransferFunction>::New();
-    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
-    
+    NSLog(@"Reset volume");
+    // whole volume visible
+    pwf->RemoveAllPoints();
     pwf->AddPoint(0,0);
-    pwf->AddPoint(2,.3);
-    pwf->AddPoint(3, .3);
-    pwf->AddPoint(40, .3);
-    pwf->AddPoint(41, .3);
-    pwf->AddPoint(42, .3);
-    pwf->AddPoint(255, .3);
-    pwf->AddPoint(256, .3);
-    //    pwf->AddPoint(99999, .8);
-    ctf->SetColorSpaceToRGB();
-    //assign colors
-    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
-    for (std::pair<std::string,std::tuple<int,int,int,int>> element : colorMap)
-    {
-        std::tuple<int,int,int,int> color = element.second;
-        if(std::get<0>(color) < 16000)
-        {
-            if(std::get<0>(color) == 2 || std::get<0>(color) == 41)
-                continue;
-            std::cout << element.first << "\t" << std::get<0>(color) << "\t" << std::get<1>(color) << "\t" << std::get<2>(color) << "\t" << std::get<3>(color) << "\t" << endl;
-            ctf->AddRGBPoint(std::get<0>(color),std::get<1>(color)/255.0,std::get<2>(color)/255.0,std::get<3>(color)/255.0);
-        }
-    }
-    
-    volumeProperty->SetColor(ctf.GetPointer());
-    volumeProperty->SetScalarOpacity(pwf.GetPointer());
-    //  set volume
-    vtkNew<vtkVolume> volume;
-    volume->SetMapper(volumeMapper.GetPointer());
-    volume->SetProperty(volumeProperty.GetPointer());
-    //    volumes.push_back(volume.GetPointer());
-    
-    vtkRenderer* myRenderer = [self getVTKRenderer];
-    myRenderer->SetBackground2(0.2,0.3,0.4);
-    myRenderer->SetBackground(0.1,0.1,0.1);
-    myRenderer->GradientBackgroundOn();
-    myRenderer->AddVolume(volume.GetPointer());
-    myRenderer->ResetCamera();
-    myRenderer->GetActiveCamera()->Zoom(0.7);
-    
+    pwf->AddPoint(1,0.5,0,1);
+    pwf->AddPoint(999999,0.5);
+    self.segmentNumber.text = nil;
+    [self.segmentNumber resignFirstResponder];
 }
 
 - (IBAction)showRegion1:(id)sender {
-    std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
-    vtkNew<vtkVolumeProperty> volumeProperty;
-    vtkNew<vtkVolume> volume;
-    volumeProperty->SetShade(1);
-    volumeProperty->SetInterpolationTypeToLinear();
-    vtkSmartPointer<vtkColorTransferFunction> ctf = vtkSmartPointer<vtkColorTransferFunction>::New();
-    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
-    
-    pwf->AddPoint(0,0);
-    //    pwf->AddPoint(2,.3);
-    //    pwf->AddPoint(3, .3);
-    //    pwf->AddPoint(40, .3);
-    //    pwf->AddPoint(41, .3);
-    //    pwf->AddPoint(42, .3);
-    //    pwf->AddPoint(255, .3);
-    pwf->AddPoint(256, .1);
-    ctf->SetColorSpaceToRGB();
-    
-    for (std::pair<std::string,std::tuple<int,int,int,int>> element : colorMap)
-    {
-        std::tuple<int,int,int,int> color = element.second;
-        if(std::get<0>(color) < 16000)
-        {
-            if(std::get<0>(color) != 2){
-                ctf->AddRGBPoint(std::get<0>(color),0,0,0);
-                continue;
-            }
-            std::cout << element.first << "\t" << std::get<0>(color) << "\t" << std::get<1>(color) << "\t" << std::get<2>(color) << "\t" << std::get<3>(color) << "\t" << endl;
-            ctf->AddRGBPoint(std::get<0>(color),std::get<1>(color)/255.0,std::get<2>(color)/255.0,std::get<3>(color)/255.0);
-        }
+    if([self.segmentNumber.text isEqual:@""]){
+        NSLog(@"empty segment");
+        return;
     }
-    volumeProperty->SetColor(ctf.GetPointer());
-    volumeProperty->SetScalarOpacity(pwf.GetPointer());
-    volume->SetProperty(volumeProperty.GetPointer());
-    
+    float myseg = [self.segmentNumber.text floatValue];
+    NSLog(@"segment number is %d", myseg);
+    NSLog(@"Get segment");
+    pwf->RemoveAllPoints();
+    pwf->AddPoint(0, 0);
+    pwf->AddPoint(myseg-1,0,0.9999,0);
+    pwf->AddPoint(myseg, 0.2,0,1);
+    pwf->AddPoint(myseg+1,0,0,0);
+    [self.segmentNumber resignFirstResponder];
 }
 
 
@@ -233,21 +177,12 @@
 
 - (void)addToRenderer {
     NSString* filepath = [[NSBundle mainBundle] pathForResource:@"aparc.DKTatlas+aseg" ofType:@"nii"];
-    // set file path
-//    if ([self->titleText isEqual:@"Template"]){
-//        NSLog(@"is template");
-//
-//    }
-//    else{
-//        NSLog(@"is patient");
-//        NSString* filepath =[[NSBundle mainBundle] pathForResource:@"aparc.a2009s+aseg" ofType:@"nii"];
-//    }
     NSLog(@"file path %@", filepath);
     
     // from path
     std::string fname([filepath UTF8String]);
     vtkNew<vtkNIFTIImageReader> mi;
-    NSLog(@"Add %s to renderer", fname.c_str());
+    // read from file
     mi->SetFileName(fname.c_str());
     mi->Update();
     double range[2];
@@ -263,14 +198,11 @@
     volumeProperty->SetInterpolationTypeToLinear();
     
     vtkSmartPointer<vtkColorTransferFunction> ctf = vtkSmartPointer<vtkColorTransferFunction>::New();
-    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
-    
+//    vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
+    // whole volume visible
     pwf->AddPoint(0,0);
-//    pwf->AddPoint(0, 0,0.999,0);
-    pwf->AddPoint(3, 0,0.9999,0);
-    pwf->AddPoint(4, 0.08,0,1);
-    pwf->AddPoint(5, 0,0,0);
-//    pwf->AddPoint(99999, 0.5);
+    pwf->AddPoint(1,0.5,0,1);
+    pwf->AddPoint(999999,0.5);
     ctf->SetColorSpaceToRGB();
     // assign colors
     std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
@@ -292,7 +224,6 @@
     vtkNew<vtkVolume> volume;
     volume->SetMapper(volumeMapper.GetPointer());
     volume->SetProperty(volumeProperty.GetPointer());
-    //    volumes.push_back(volume.GetPointer());
     
     vtkRenderer* myRenderer = [self getVTKRenderer];
     myRenderer->SetBackground2(0.2,0.3,0.4);
@@ -323,7 +254,7 @@
     vtkNew<vtkRenderer> renderer;
     renWin->AddRenderer(renderer.Get());
     [self setVTKRenderer:renderer.Get()];
-
+    
     //set color map
     std::unordered_map<std::string, std::tuple<int,int,int,int>> colorMap = [self processLUT];
     [self addToRenderer];
@@ -617,6 +548,11 @@
     
     // Display the buffer
     [(GLKView *)self.view display];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)text{
+    [text resignFirstResponder];
+    return YES;
 }
 
 @end
