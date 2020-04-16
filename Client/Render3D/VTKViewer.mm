@@ -124,9 +124,10 @@ vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction
     NSLog(@"opacity value %d", self.slider.value);
     pwf->RemoveAllPoints();
     pwf->AddPoint(0, 0);
+    pwf->AddPoint(1,.02);
     pwf->AddPoint(myseg-1,0,0.9999,0);
     pwf->AddPoint(myseg, self.slider.value,0,1);
-    pwf->AddPoint(myseg+1,0,0,0);
+    pwf->AddPoint(myseg+1,0.02,0,0);
     [self.segmentNumber resignFirstResponder];
 }
 
@@ -151,9 +152,10 @@ vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction
     NSLog(@"Get segment");
     pwf->RemoveAllPoints();
     pwf->AddPoint(0, 0);
+    pwf->AddPoint(1,.02);
     pwf->AddPoint(myseg-1,0,0.9999,0);
     pwf->AddPoint(myseg, 0.2,0,1);
-    pwf->AddPoint(myseg+1,0,0,0);
+    pwf->AddPoint(myseg+1,0.02,0,0);
     [self.segmentNumber resignFirstResponder];
 }
 
