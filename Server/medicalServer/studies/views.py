@@ -101,7 +101,7 @@ def index(request):
                             return HttpResponse('Not ready')
                         else:
                             return HttpResponse('No data processing and no study available')
-                    #change 'open()' to contain path to a file in order to demo
+                    #change 'open()' to contain path to a file in order to demo (ex. I set mine to "/Users/Jonas/255.0_label1.nii.gz" in order to test it)
                     my_data =  open(study.data_loc, 'rb')
                     response = HttpResponse(my_data.read(), content_type='application/octet-stream')
                     response['Content-Encoding'] = 'tar'
