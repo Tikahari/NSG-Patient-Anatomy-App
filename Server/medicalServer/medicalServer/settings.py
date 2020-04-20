@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 LOCAL_FILE_DIR='/home/michael/results/'
 
 UNPROC_DATA_SAVE_DIR = '/home/michael/temp/dataToSend/'
-PROC_DATA_SAVE_DIR='/home/michael/temp/studies/'
+PROC_DATA_SAVE_DIR='/'
 MEDIA_ROOT = UNPROC_DATA_SAVE_DIR
 PROCESSING_SERVER = 'http://localhost:9000'
 PROCESSING_SERVER_TOKEN = '399de70740d71330871384bf0b7f8ea938c7c986'

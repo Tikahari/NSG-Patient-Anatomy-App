@@ -85,6 +85,7 @@ def index(request):
                 "studyStatus": str(study.status)
                 })
                 
+                
                   
             return JsonResponse(s,safe=False)
             
@@ -100,7 +101,7 @@ def index(request):
                             return HttpResponse('Not ready')
                         else:
                             return HttpResponse('No data processing and no study available')
-
+                    #change 'open()' to contain path to a file in order to demo
                     my_data =  open(study.data_loc, 'rb')
                     response = HttpResponse(my_data.read(), content_type='application/octet-stream')
                     response['Content-Encoding'] = 'tar'
