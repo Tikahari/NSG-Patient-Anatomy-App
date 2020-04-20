@@ -1,10 +1,13 @@
-build/
+*.binarycookies
+*.ktx
+xcuserdata/
+*/com.jonas.dev/
 
 *.DS_Store
+*.swp
+*~.nib
 
-
-project.xcworkspace/
-xcuserdata/
+build/
 
 *.pbxuser
 *.perspective

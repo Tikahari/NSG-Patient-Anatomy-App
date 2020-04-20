@@ -16,6 +16,7 @@ class Selection: UIViewController {
     
     @IBOutlet var procedures: UIButton!
     
+    var filename : String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         template.layer.cornerRadius = 10
@@ -43,6 +44,7 @@ class Selection: UIViewController {
         }
         else if segue.identifier == "toProgressFromHeadScan", let vc = segue.destination as? Progress {
             vc.buttonClicked = "Patient Headscan"
+            vc.nameOfFile = filename
         }
         else if segue.identifier == "toProgressFromProcedures", let vc = segue.destination as? Progress {
             vc.buttonClicked = "Procedures"

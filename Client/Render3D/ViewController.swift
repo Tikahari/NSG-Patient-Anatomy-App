@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    
+    var studies = [Study]()
+    var readyToSegue = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,7 @@ class ViewController: UIViewController {
         let params = ["username":username, "password": password] as! Dictionary<String, String>
         
         //create a urlrequest type, passing in the url to the local server
-        let request = NSMutableURLRequest(url: NSURL(string: "http://192.168.1.138:8000/login?username")! as URL)
+        let request = NSMutableURLRequest(url: NSURL(string: "http://192.168.1.124:8000/login")! as URL)
         let bodyData = "username=" + username! + "&password=" + password!;
         //set the method to "POST"
         request.httpMethod = "POST"
@@ -49,8 +50,25 @@ class ViewController: UIViewController {
         var task = URLSession.shared.dataTask(with: request as URLRequest){ data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
                 if(httpResponse.statusCode == 200){
+                    
+                    self.readyToSegue = true
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) {
+                        var studiesArray = [Study]()
+                        let jsonArray = (json as! Array<NSObject>)
+                
+                        for study in jsonArray{
+                            let patientName = study.value(forKey: "patientName") as! String
+                            let studyId = (study.value(forKey: "studyID") as! String)
+                            let studyName = study.value(forKey: "studyName") as! String
+                            let studyStatus = study.value(forKey: "studyStatus") as! String
+                            
+                            let newStudy = Study(patientName: patientName, studyId: studyId, studyName: studyName, studyStatus: studyStatus)
+                            studiesArray.append(newStudy)
+                        }
+                        self.studies = studiesArray
+                    }
                     DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "loginSegue", sender: self)
+                        if(self.readyToSegue){ self.performSegue(withIdentifier: "loginSegue", sender: self) }
                     }
                     
                 }
@@ -72,8 +90,8 @@ class ViewController: UIViewController {
         task.resume()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loginSegue", let vc = segue.destination as? Progress {
-            vc.fromLogin = true
+        if segue.identifier == "loginSegue", let vc = segue.destination as? TableViewController {
+            vc.studiesData = self.studies
         }
     }
     

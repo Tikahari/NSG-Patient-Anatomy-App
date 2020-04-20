@@ -2,12 +2,51 @@
 //  Viewer.h
 //  Render3D
 //
-//  Created by Jonas Pena on 4/20/20.
+//  Created by Tikahari Khanal on 4/10/20.
 //  Copyright © 2020 Jonas Pena. All rights reserved.
 //
 
-#ifndef Viewer_h
-#define Viewer_h
+#import <GLKit/GLKit.h>
+#import <UIKit/UIKit.h>
 
+#ifdef __cplusplus
+  // Forward declarations
+  class vtkIOSRenderWindow;
+  class vtkIOSRenderWindowInteractor;
+  class vtkRenderer;
+  // Type declarations
+  typedef vtkIOSRenderWindow *vtkIOSRenderWindowRef;
+  typedef vtkIOSRenderWindowInteractor *vtkIOSRenderWindowInteractorRef;
+    typedef vtkRenderer *vtkRendererRef;
+#else
+  // Type declarations
+  typedef void *vtkIOSRenderWindowRef;
+  typedef void *vtkIOSRenderWindowInteractorRef;
+    typedef void *vtkRendererRef;
+#endif
 
-#endif /* Viewer_h */
+NS_ASSUME_NONNULL_BEGIN
+
+@interface Viewer : GLKViewController{
+    @private
+    vtkIOSRenderWindowRef _myVTKRenderWindow;
+    vtkRendererRef _myRenderer;
+}
+
+@property (nonatomic, strong) UIWindow *window;
+
+- (vtkIOSRenderWindowRef)getVTKRenderWindow;
+- (void)setVTKRenderWindow:(vtkIOSRenderWindowRef)theVTKRenderWindow;
+
+-(vtkRendererRef)getVTKRenderer;
+-(void)setVTKRenderer:(vtkRendererRef) theRenderer;
+
+- (vtkIOSRenderWindowInteractorRef)getInteractor;
+
+- (void)setupPipeline;
+
+- (void)addToRenderer:(NSString*)filename;
+
+@end
+
+NS_ASSUME_NONNULL_END

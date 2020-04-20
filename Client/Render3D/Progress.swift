@@ -10,12 +10,13 @@ import UIKit
 
 class Progress: UIViewController {
     
-    
+    var nameOfFile : String = ""
     @IBOutlet var progressCircle: circlular!
     var buttonClicked : String = ""
     var fromLogin = false
     var interval = 0.0
     var delay = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("from login", fromLogin)
@@ -43,7 +44,12 @@ class Progress: UIViewController {
     }
     
     @objc func selection(){
-        self.performSegue(withIdentifier: "toSelection", sender: self)
+        if(buttonClicked == "Patient Headscan"){
+            self.performSegue(withIdentifier: "toViewerSegue", sender: self)
+        }
+        else{
+            self.performSegue(withIdentifier: "toSelection", sender: self)
+        }
     }
     
     @objc func progress(duration: TimeInterval){
@@ -54,6 +60,14 @@ class Progress: UIViewController {
         if segue.identifier == "toSelection", let vc = segue.destination as? VTKViewer {
             vc.setValue(buttonClicked, forKey: "titleText");
         }
+        if segue.identifier == "toSelection", let vc = segue.destination as? Selection {
+            vc.filename = nameOfFile
+        }
+        if segue.identifier == "toViewerSegue", let vc = segue.destination as? Viewer {
+            vc.setValue(buttonClicked, forKey: "titleText");
+            vc.setValue(nameOfFile, forKey: "filename");
+        }
+        
     }
     /*
      // MARK: - Navigation
