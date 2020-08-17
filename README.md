@@ -1,5 +1,6 @@
 # NSG-Patient-Anatomy-App
 #### Contributors: Tikahari Khanal, Michael Gordo, Jonas Pena
+This project was done under the supervision of the UF Department of Neurosurgery and College of Medicine with the intention of improving physician communication and patient decision making when considering treatment, diagnosis, and surgery in the context of lesions of the brain.
 #### Necessary Installs
 ##### Client
 * VTK 7.0.0
