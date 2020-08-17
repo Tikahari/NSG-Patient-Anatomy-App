@@ -1,6 +1,12 @@
 # NSG-Patient-Anatomy-App
 #### Contributors: Tikahari Khanal, Michael Gordo, Jonas Pena
 This project was done under the supervision of the UF Department of Neurosurgery and College of Medicine with the intention of improving physician communication and patient decision making when considering treatment, diagnosis, and surgery in the context of lesions of the brain.
+## Table of contents
+* [Necessary Installs](#Necessary-Installs)
+* [Overview](#Overview)
+* [Architecture](#Architecture)
+* [Render](#Render)
+* [Contact](#Contact)
 #### Necessary Installs
 ##### Client
 * VTK 7.0.0
@@ -25,3 +31,5 @@ The project had 3 major components: a client which provided the user interface, 
 ![alt text](https://github.com/Tikahari/NSG-Patient-Anatomy-App/blob/master/img/Full.PNG)
 ![alt text](https://github.com/Tikahari/NSG-Patient-Anatomy-App/blob/master/img/Left%20Hemisphere.PNG)<br/>
 Here we see a responsive, color coded scan with and without an emphasized segment. The physician or patient would be presented with a table that relates numeric values to anatomical regions of the brain (in this case a 2 corresponds to the right hemisphere). The user can also control the opacity of the entire brain in the left image and the emphasized segment in the second through the slider along the bottom of the screen. Options to reset and return to the previous menu were deemed appropriate.
+## Contact
+Email: kyle.scott@ufl.edu
