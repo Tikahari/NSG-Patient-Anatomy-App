@@ -57,7 +57,7 @@
 #include <deque>
 #include <vector>
 /* 2 or 3 -- needs to match VTK version */
-#define GL_ES_VERSION 3
+#define GL_ES_VERSION 2
 
 vtkSmartPointer<vtkPiecewiseFunction> pwf = vtkSmartPointer<vtkPiecewiseFunction>::New();
 

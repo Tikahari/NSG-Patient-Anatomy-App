@@ -1,7 +1,7 @@
 build/
 
-*.DS_Store
-
+**/.DS_Store
+*.icloud
 
 project.xcworkspace/
 xcuserdata/
@@ -9,3 +9,6 @@ xcuserdata/
 *.pbxuser
 *.perspective
 *.perspectivev3
+.DS_Store
+.gitignore
+Client/.DS_Store
