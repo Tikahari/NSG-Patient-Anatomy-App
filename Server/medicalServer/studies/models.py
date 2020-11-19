@@ -2,8 +2,9 @@ import os
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+
 def studies_path():
-    return os.path.join(settings.PROC_DATA_SAVE_DIR, '')#change local file directory to where /studies/ is located
+    return os.path.join(settings.PROC_DATA_SAVE_DIR, '') #change local file directory to where /studies/ is located
 
 
 
@@ -24,7 +25,7 @@ class Study(models.Model):
 class StudyAccess(models.Model):
     user = models.CharField(max_length=200,default='Unknown')
     study = models.ForeignKey(
-        'Study',
+        'Study', 
         on_delete=models.CASCADE,
     )
 

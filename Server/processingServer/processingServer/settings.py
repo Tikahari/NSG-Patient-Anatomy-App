@@ -32,7 +32,12 @@ SECRET_KEY = 'fbwwa-&w!s(rq#np^ot^r*w@#i4#d(_3jv!(z2ht^3bake)+l*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.1.127',
+    '10.20.0.190',
+    '127.0.0.1',
+    'localhost'
+]
 
 
 # Application definition
@@ -131,13 +136,14 @@ USE_L10N = True
 USE_TZ = True
 
 FREESURFER_SUBJECT_PATH = '/home/michael/freesurfer/subjects/'
-PROCESSED_SAVE_DIR = '/home/michael/temp/processedData/'
-UNPROCESSED_DATA_DIR = '/home/michael/temp/unprocessedData/'
+
+PROCESSED_SAVE_DIR = '/Users/daniel/Desktop/NSG/temp/processedData/'
+UNPROCESSED_DATA_DIR = '/Users/daniel/Desktop/NSG/temp/unprocessedData/'
 MEDIA_ROOT = UNPROCESSED_DATA_DIR
 
 
 OTHER_SERVER_TOKEN = 'b54b8e245c2bcc69642841993edf97adba49b962'
-OTHER_SERVER = 'http://localhost:8000/'
+OTHER_SERVER = 'http://localhost:8080/'
 
 
 

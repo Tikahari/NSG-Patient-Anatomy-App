@@ -25,7 +25,9 @@ SECRET_KEY = '1=6kpfb!dx-o(j7cf&#n(_if!q7slk%hnd5ec3--8@m(ly7sa='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = [
-    '127.0.0.1',
+    '192.168.1.127',
+    '10.20.0.190',
+    '127.`0.0.1',
     'localhost',
     '192.168.1.37',
     '192.168.1.138'
@@ -129,10 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOCAL_FILE_DIR='/home/michael/results/'
+LOCAL_FILE_DIR='/Users/daniel/Desktop/NSG/results/'
 
-UNPROC_DATA_SAVE_DIR = '/home/michael/temp/dataToSend/'
-PROC_DATA_SAVE_DIR='/home/michael/temp/studies/'
+UNPROC_DATA_SAVE_DIR = '/Users/daniel/Desktop/NSG/temp/dataToSend/'
+PROC_DATA_SAVE_DIR='/Users/daniel/Desktop/NSG/temp/studies/'
 MEDIA_ROOT = UNPROC_DATA_SAVE_DIR
 PROCESSING_SERVER = 'http://localhost:9000'
 PROCESSING_SERVER_TOKEN = '399de70740d71330871384bf0b7f8ea938c7c986'

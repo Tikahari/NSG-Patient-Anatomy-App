@@ -3,7 +3,7 @@ import numpy as np
 import nibabel as nib
 import dicom2nifti #Program should have the option of either 
 
-data_path = '/cUsers/daniel/Desktop/NSG/Scan-Data.nosync/QIN-BRAIN-DSC-MRI/QIN-BRAIN-DSC-01-07/'# This should be passed in at runtime, certainly variable
+data_path = '/Users/daniel/Desktop/NSG/Scan-Data.nosync/QIN-BRAIN-DSC-MRI/QIN-BRAIN-DSC-01-07/'# This should be passed in at runtime, certainly variable
 ourfile = os.path.join(data_path, 'aseg.nii')
 img = nib.load(ourfile)
 
@@ -28,7 +28,7 @@ for key in mapCoords:
     tList = mapCoords[key]
     tData = np.zeros((255,255,255))#generate zeros
     s = str(key) + '_label.nii.gz'
-    save_loc = '/home/michael/results/test2/'#change for save location
+    save_loc = '/Users/daniel/Desktop/NSG/Scan-Data.nosync/results/test2/'#change for save location
     save_path = os.path.join(save_loc,s)
     for coord in tList:
         tData[coord[0],coord[1],coord[2]] = key #fix the coords to the correct value for this 'label'

@@ -1,6 +1,6 @@
 from multiprocessing import Process, Queue
 import os
-from .models import Task
+import django
 import requests
 from django.conf import settings
 import subprocess
@@ -8,6 +8,10 @@ import tarfile
 import dicom2nifti
 import shutil
 
+
+django.setup()
+
+from .models import Task
 
 
 def checkForDICOM(directory):

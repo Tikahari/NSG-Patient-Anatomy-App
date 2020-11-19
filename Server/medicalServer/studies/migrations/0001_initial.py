@@ -5,6 +5,9 @@ from django.db import migrations, models
 import django.db.models.deletion
 import studies.models
 
+def studies_path():
+    return os.path.join(settings.PROC_DATA_SAVE_DIR, '') #change local file directory to where /studies/ is located
+
 
 class Migration(migrations.Migration):
 
@@ -31,7 +34,7 @@ class Migration(migrations.Migration):
             name='StudyFile',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('files', models.FilePathField(path='/home/michael/results/studies')),
+                ('files', models.FilePathField(path='path=studies_path')),
                 ('study', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='studies.Study')),
             ],
         ),

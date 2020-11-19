@@ -3,7 +3,7 @@ import numpy as np
 import nibabel as nib
 
 def loop_access(n,m,data,tpl):
-    if n >m:
+    if n > m:
         return loop_access(n,m+1,data[tpl[m]],tpl)
     else:
         return data[tpl[m]]

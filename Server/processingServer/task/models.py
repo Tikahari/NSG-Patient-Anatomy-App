@@ -2,6 +2,7 @@
 import os
 from django.db import models
 from django.conf import settings
+
 def processed_path():
     return os.path.join(settings.PROCESSED_SAVE_DIR, '')#change local file directory to where /studies/ is located
 def unprocessed_path():

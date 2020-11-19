@@ -9,6 +9,9 @@ xcuserdata/
 *.pbxuser
 *.perspective
 *.perspectivev3
+**/.pyc
+
 .DS_Store
 .gitignore
 Client/.DS_Store
+Client/NSG_Metal_Render3D/Pods
