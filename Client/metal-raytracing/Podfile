@@ -1,0 +1,8 @@
+ target 'MPSDynamicScene-iOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  #  (check releases to make sure this is the latest version)
+  use_frameworks!
+  pod 'Alamofire', '~> 5.3'
+  pod 'PromisedFuture'
+end
+
