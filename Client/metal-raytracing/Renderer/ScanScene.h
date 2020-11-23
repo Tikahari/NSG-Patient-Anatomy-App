@@ -12,21 +12,20 @@ Header for 3D object classes
 #include <simd/simd.h>
 
 // A simple static sphere object
-//@interface SphereSceneObject : SceneObject
-//
-//// Initializer
-//- (instancetype)initWithRadius:(float)radius
-//            horizontalSegments:(NSUInteger)horizontalSegments
-//              verticalSegments:(NSUInteger)verticalSegments;
-//
-//@end
+@interface SphereSceneObject : SceneObject
+
+// Initializer
+- (instancetype)initWithRadius:(float)radius
+            horizontalSegments:(NSUInteger)horizontalSegments
+              verticalSegments:(NSUInteger)verticalSegments;
+
+@end
 
 // A representation of a nifti volume rendering
 @interface ScanVolumeSceneObject : SceneObject
 
 //Initializer
 - (instancetype)initWithVertices:(float3 *)vertices
-                           faces:(float3 *)faces
                          normals:(float3 *)normals
                              val:(float *)val
                         numVerts:(int)numVerts;

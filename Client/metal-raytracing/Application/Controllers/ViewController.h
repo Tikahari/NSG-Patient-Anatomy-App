@@ -23,7 +23,6 @@ Header for the cross-platform view controller
 
 - (void)addDataModelWithVertices:(vector_float3 *)vertices
                          normals:(vector_float3 *)normals
-                           faces:(vector_float3 *)faces
                              val:(float *)val
                             size:(int)size;
 

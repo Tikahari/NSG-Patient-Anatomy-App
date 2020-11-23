@@ -47,12 +47,12 @@ Implementation of platform independent renderer class
     
     ScanScene *_scene;
     ScanVolumeSceneObject *_scan;
+    
 }
 
 // Initializer
 -(nonnull instancetype)initWithMetalKitView:(nonnull MTKView *)view
                                    vertices:(vector_float3 *)vertices
-                                      faces:(vector_float3 *)faces
                                     normals:(vector_float3 *)normals
                                         val:(float *)val
                                    numVerts:(int)numVerts;
@@ -73,13 +73,10 @@ Implementation of platform independent renderer class
         [self createPipelines];
         [self createIntersector];
         
-        _scan = [[ScanVolumeSceneObject alloc] initWithVertices:vertices faces:faces normals:normals val:val numVerts:numVerts];
+        NSLog(@"there are %d vertices being loaded in the pointer. Printing from Renderer.", numVerts);
         
+        _scan = [[ScanVolumeSceneObject alloc] initWithVertices:vertices normals:normals val:val numVerts:numVerts];
         
-//        _scene = [[SampleScene alloc] initWithDevice:_device
-//                                             library:_library
-//                                        commandQueue:_queue
-//                                                scan:_scan];
         _scene = [[ScanScene alloc] initWithDevice:_device
                                              library:_library
                                         commandQueue:_queue];
@@ -314,7 +311,7 @@ Implementation of platform independent renderer class
     _prevUniforms = _uniforms;
 
     // Compute the camera position and forward, right, and up vectors.
-    float3 position = vector3(-8.0f, 8.0f, 20.0f);
+    float3 position = vector3(-300.0f, 300.0f, 100.0f);
     float3 target = vector3(0.0f, 0.0f, 0.0f);
     
     float3 forward = normalize(target - position);

@@ -23,15 +23,19 @@ Implementation of the cross-platform view controller
 
 - (void)addDataModelWithVertices:(vector_float3 *)vertices
                          normals:(vector_float3 *)normals
-                           faces:(vector_float3 *)faces
                              val:(float *)val
                             size:(int)size
 {
+    _vertices = (vector_float3*)malloc(size * sizeof(vector_float3));
     _vertices = vertices;
+    _normals = (vector_float3*)malloc(size * sizeof(vector_float3));
     _normals = normals;
-    _faces = faces;
     _val = val;
     _size = size;
+    
+    
+    
+    
 }
 
 - (void)viewDidLoad
@@ -74,10 +78,9 @@ Implementation of the cross-platform view controller
 #endif
         return;
     }
-
+    
     _renderer = [[Renderer alloc] initWithMetalKitView:_view
                                               vertices:(_vertices)
-                                                 faces:(_faces)
                                                normals:(_normals)
                                                    val:(_val)
                                                   numVerts:(_size)];
@@ -88,25 +91,3 @@ Implementation of the cross-platform view controller
 }
 
 @end
-
-//@implementation ScanVolume {
-//    vector_float3 *_vertices;
-//    vector_float3 *_faces;
-//    vector_float3 *_normals;
-//    vector_float3 *_val;
-//}
-//- (instancetype)initWithVertices:(vector_float3 *)vertices
-//                           faces:(vector_float3 *)faces
-//                         normals:(vector_float3 *)normals
-//                             val:(vector_float3 *)val;
-//{
-//
-//    if (self) {
-//        _vertices = vertices;
-//        _faces = faces;
-//        _normals = normals;
-//        _val = val;
-//    }
-//    return self;
-//}
-//@end

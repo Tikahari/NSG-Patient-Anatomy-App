@@ -68,7 +68,8 @@ def auth_login(request):
             "normals": normals.tolist(),
             "val": val.tolist()
         }
-        # For testing purposes, An array containing 2 of the same example scan are being sent back on login. This should be changed to have the login return a number of scans, and on scan selection the data for that particular scan should be passed back.
+        print(vertices)
+        # For testing purposes, An array containing 2  of the same example scan are being sent back on login. This should be changed to have the login return a number of scans, and on scan selection the data for that particular scan should be passed back.
         scans = list()
         scans.append(s)
         # scans.append(s)

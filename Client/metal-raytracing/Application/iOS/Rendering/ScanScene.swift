@@ -11,5 +11,5 @@
 //    
 //}
 class ScanVolumeSceneObject : SceneObject {
-    
+
 }
