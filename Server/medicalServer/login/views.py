@@ -58,35 +58,27 @@ def auth_login(request):
         img = nib.load(test_path())
         np_img = np.array(img.dataobj).astype(np.float64)
         vertices, faces, normals, val = measure.marching_cubes(np_img)
-        data = img.get_fdata()
-        hdr = img.header
-        data_shape = hdr.get_data_shape()
-        affine = hdr.get_best_affine()
-
-        dim = hdr["dim"]
-        qform_code = hdr["qform_code"]
         s = ()
         s = {
             # "data": data.tolist(),
             # "data_shape": np.array(data_shape).tolist(),
+            "size": len(vertices),
             "vertices": vertices.tolist(),
             "faces": faces.tolist(),
             "normals": normals.tolist(),
             "val": val.tolist()
         }
+        # For testing purposes, An array containing 2 of the same example scan are being sent back on login. This should be changed to have the login return a number of scans, and on scan selection the data for that particular scan should be passed back.
         scans = list()
         scans.append(s)
-        scans.append(s)
+        # scans.append(s)
         response = ()
         response = {
             "scans": scans
         }
-        print("Verts Type: " + str(type(vertices.tolist())))
-        print("faces Type: " + str(type(faces.tolist())))
-        print("norm Type: " + str(type(normals.tolist())))
-        print("val Type: " + str(type(val.tolist())))
 
         # Send it back
+        print("Vertices sent in reponse to login.")
         return JsonResponse(response,safe=False)
     return HttpResponse(status=401)
 
