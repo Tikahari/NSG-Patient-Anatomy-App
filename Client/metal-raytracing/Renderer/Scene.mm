@@ -322,6 +322,10 @@ Implementation of scene creation functions
 }
 
 - (void)finalize {
+    int instanceCount = [_sceneObjectInstances count];
+    int objectCount = [_sceneObjects count];
+    NSLog(@"there are %d objects in the _sceneObjectInstances", instanceCount);
+    NSLog(@"there are %d objects in the _sceneObjectInstances", objectCount);
     [self createBuffers];
     [self createAccelerationStructures];
 }

@@ -15,7 +15,8 @@ Header for platform independent renderer class
                                    vertices:(nonnull vector_float3 *)vertices
                                       faces:(nonnull vector_float3 *)faces
                                     normals:(nonnull vector_float3 *)normals
-                                        val:(nonnull float *)val;
+                                        val:(nonnull float *)val
+                                       numVerts:(int)numVerts;
 
 @end
 

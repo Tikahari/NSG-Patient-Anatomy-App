@@ -45,7 +45,7 @@ Implementation of platform independent renderer class
     unsigned int _frameIndex;
     NSDate *_startTime;
     
-    SampleScene *_scene;
+    ScanScene *_scene;
     ScanVolumeSceneObject *_scan;
 }
 
@@ -54,7 +54,8 @@ Implementation of platform independent renderer class
                                    vertices:(vector_float3 *)vertices
                                       faces:(vector_float3 *)faces
                                     normals:(vector_float3 *)normals
-                                        val:(float *)val;
+                                        val:(float *)val
+                                   numVerts:(int)numVerts;
 {
     self = [super init];
 
@@ -72,17 +73,18 @@ Implementation of platform independent renderer class
         [self createPipelines];
         [self createIntersector];
         
-        _scan = [[ScanVolumeSceneObject alloc] initWithVertices:vertices faces:faces normals:normals val:val];
+        _scan = [[ScanVolumeSceneObject alloc] initWithVertices:vertices faces:faces normals:normals val:val numVerts:numVerts];
         
         
 //        _scene = [[SampleScene alloc] initWithDevice:_device
 //                                             library:_library
 //                                        commandQueue:_queue
 //                                                scan:_scan];
-        _scene = [[SampleScene alloc] initWithDevice:_device
+        _scene = [[ScanScene alloc] initWithDevice:_device
                                              library:_library
                                         commandQueue:_queue];
-        [_scene addScan:_scan];
+        
+        [_scene addScanAndFinalize:_scan];
         _startTime = [NSDate date];
     }
 

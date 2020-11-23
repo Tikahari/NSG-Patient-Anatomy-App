@@ -7,8 +7,8 @@
 
 import Foundation
 
-//let IP_target = "10.20.0.190" //This is dependant on where the django "Medical Server" is running.
-let IP_target = "172.20.4.203"
+let IP_target = "10.0.0.139" //This is dependant on where the django "Medical Server" is running.
+
 let PORT_target = "8080"
 
 //import Alamofire

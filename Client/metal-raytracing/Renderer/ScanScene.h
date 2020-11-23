@@ -12,14 +12,14 @@ Header for 3D object classes
 #include <simd/simd.h>
 
 // A simple static sphere object
-@interface SphereSceneObject : SceneObject
-
-// Initializer
-- (instancetype)initWithRadius:(float)radius
-            horizontalSegments:(NSUInteger)horizontalSegments
-              verticalSegments:(NSUInteger)verticalSegments;
-
-@end
+//@interface SphereSceneObject : SceneObject
+//
+//// Initializer
+//- (instancetype)initWithRadius:(float)radius
+//            horizontalSegments:(NSUInteger)horizontalSegments
+//              verticalSegments:(NSUInteger)verticalSegments;
+//
+//@end
 
 // A representation of a nifti volume rendering
 @interface ScanVolumeSceneObject : SceneObject
@@ -28,7 +28,8 @@ Header for 3D object classes
 - (instancetype)initWithVertices:(float3 *)vertices
                            faces:(float3 *)faces
                          normals:(float3 *)normals
-                             val:(float *)val;
+                             val:(float *)val
+                        numVerts:(int)numVerts;
 
 @end
 
@@ -37,28 +38,22 @@ Header for 3D object classes
 // y = cos(x * frequency) * sin(z * frequency) * amplitude. This object demonstrates
 // vertex animation. The cos and sin terms are shifted over time to generate the
 // animation.
-@interface PlaneSceneObject : SceneObject
+//@interface PlaneSceneObject : SceneObject
+//
+//// Initializer
+//- (instancetype)initWithLibrary:(id <MTLLibrary>)library
+//                           size:(float)size
+//                     resolution:(NSUInteger)resolution
+//                      frequency:(float)frequency
+//                      amplitude:(float)amplitude
+//                      timeScale:(float2)timeScale;
+//
+//@end
 
-// Initializer
-- (instancetype)initWithLibrary:(id <MTLLibrary>)library
-                           size:(float)size
-                     resolution:(NSUInteger)resolution
-                      frequency:(float)frequency
-                      amplitude:(float)amplitude
-                      timeScale:(float2)timeScale;
+// A scene containing the vertices information for a scan.
+@interface ScanScene : Scene
 
-@end
-
-// A sample scene containing animated spheres and an animated plane.
-@interface SampleScene : Scene
-//Initializer
-//- (instancetype)initWithScan:(ScanVolumeSceneObject *)scan;
-////- (void)updateWithVertices:(float3 *)vertices
-////                           faces:(float3 *)faces
-////                         normals:(float3 *)normals
-////                             val:(float *)val;
-
-- (void) addScan : (ScanVolumeSceneObject *)scan;
+- (void) addScanAndFinalize : (ScanVolumeSceneObject *)scan;
 
 @end
 

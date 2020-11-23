@@ -23,12 +23,13 @@ struct MetalViewController: UIViewControllerRepresentable {
         print("Making Metal View Controller")
         //Instantitate
         let metalViewController: ViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Metal-ObjC")
-        var dataModel: HeadScanDataModel = HeadScanDataModel(verts: activeScan.vertices, faces: activeScan.faces, normals: activeScan.normals, val: activeScan.val)
+        var dataModel: HeadScanDataModel = HeadScanDataModel(verts: activeScan.vertices, faces: activeScan.faces, normals: activeScan.normals, val: activeScan.val, size: activeScan.size)
 //        dataModel.vertices.withUnsafeBufferPointer {
 //            (vertices: UnsafeBufferPointer<vector_float3>) -> () in vertices.baseAddress
 //        }
         //add scan to view controller
-        metalViewController.addDataModel(withVertices: &dataModel.vertices, normals: &dataModel.normals, faces: &dataModel.faces, val: &dataModel.val)
+//        print(dataModel)
+        metalViewController.addDataModel(withVertices: &dataModel.vertices, normals: &dataModel.normals, faces: &dataModel.faces, val: &dataModel.val, size: Int32(dataModel.size))
       
         
         return metalViewController

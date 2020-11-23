@@ -18,17 +18,20 @@ Implementation of the cross-platform view controller
     vector_float3 *_faces;
     vector_float3 *_normals;
     float *_val;
+    int _size;
 }
 
 - (void)addDataModelWithVertices:(vector_float3 *)vertices
                          normals:(vector_float3 *)normals
                            faces:(vector_float3 *)faces
                              val:(float *)val
+                            size:(int)size
 {
     _vertices = vertices;
     _normals = normals;
     _faces = faces;
     _val = val;
+    _size = size;
 }
 
 - (void)viewDidLoad
@@ -76,7 +79,8 @@ Implementation of the cross-platform view controller
                                               vertices:(_vertices)
                                                  faces:(_faces)
                                                normals:(_normals)
-                                                   val:(_val)];
+                                                   val:(_val)
+                                                  numVerts:(_size)];
 
     [_renderer mtkView:_view drawableSizeWillChange:_view.bounds.size];
 
