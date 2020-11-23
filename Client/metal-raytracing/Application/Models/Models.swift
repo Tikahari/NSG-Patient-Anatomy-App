@@ -25,10 +25,7 @@ struct HeadScanListModel: Identifiable, Codable {
     let id: String
 }
 struct HeadScanJSONModel: Codable {
-    
-//    let data: [[[Float]]]
-//    let data_shape: [Int]
-//    let affine: [[Float]]
+    let size: Int
     let vertices: [[Float]]
     let faces: [[Float]]
     let normals: [[Float]]
@@ -39,15 +36,18 @@ struct HeadScanDataModel {
     var faces = [SIMD3<Float>]()
     var normals = [SIMD3<Float>]()
     var val: [Float]
+    var size: Int
     
-    init(verts: [[Float]], faces: [[Float]], normals: [[Float]], val: [Float]) {
+    init(verts: [[Float]], faces: [[Float]], normals: [[Float]], val: [Float], size: Int) {
         for index in 1...val.count {
             self.vertices.append(SIMD3<Float>(verts[index - 1]))
             self.faces.append(SIMD3<Float>(faces[index - 1]))
             self.normals.append(SIMD3<Float>(normals[index - 1]))
             
+            
         }
         self.val = val
+        self.size = size
         
     }
 }
