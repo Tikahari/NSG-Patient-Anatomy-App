@@ -29,7 +29,6 @@
 		51F7001A209BCA180017E288 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F70006209BC3F00017E288 /* Main.storyboard */; };
 		51F7FFBA209BC1C40017E288 /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E97FA52017014200D09D13 /* MetalPerformanceShaders.framework */; };
 		51F7FFCD209BC1C60017E288 /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51E97FA72017014A00D09D13 /* MetalPerformanceShaders.framework */; };
-		6507A8FF2562040400A11EEC /* SwiftUIHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507A8FE2562040400A11EEC /* SwiftUIHostingController.swift */; };
 		6507A90925622E7600A11EEC /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507A90525622E7600A11EEC /* Scene.swift */; };
 		6507A90A25622E7600A11EEC /* ScanScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507A90625622E7600A11EEC /* ScanScene.swift */; };
 		6507A90B25622E7600A11EEC /* Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6507A90725622E7600A11EEC /* Transforms.swift */; };
@@ -86,7 +85,6 @@
 		51F7FFF1209BC3B70017E288 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F7FFF7209BC3C00017E288 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51F7FFF9209BC3C00017E288 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6507A8FE2562040400A11EEC /* SwiftUIHostingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIHostingController.swift; sourceTree = "<group>"; };
 		6507A90525622E7600A11EEC /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		6507A90625622E7600A11EEC /* ScanScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanScene.swift; sourceTree = "<group>"; };
 		6507A90725622E7600A11EEC /* Transforms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transforms.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 				65E6FBD8255F3EA8009E64CA /* MainView.swift */,
 				65E6FBDB255F3EA8009E64CA /* LoginView.swift */,
 				657CC7AC255F54B6009ED9FA /* MetalViewControllerRepresentable.swift */,
-				6507A8FE2562040400A11EEC /* SwiftUIHostingController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,7 +364,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65E6FC04255F4178009E64CA /* NetworkController.swift in Sources */,
-				6507A8FF2562040400A11EEC /* SwiftUIHostingController.swift in Sources */,
 				65E6FBDF255F3EA8009E64CA /* ScanSelectionView.swift in Sources */,
 				65E6FC02255F4178009E64CA /* APIRouter.swift in Sources */,
 				6507A90B25622E7600A11EEC /* Transforms.swift in Sources */,
@@ -496,7 +492,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;

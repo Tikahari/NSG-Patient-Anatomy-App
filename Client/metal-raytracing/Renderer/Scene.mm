@@ -216,15 +216,14 @@ Implementation of scene creation functions
     
     // Upload static vertex data to the vertex buffer
     for (SceneObject *object in _sceneObjects) {
-        NSLog(@"Vertex Count: %lu", vertexCount);
         [object getVertices:&vertices[vertexCount]
                     normals:&normals[vertexCount]];
         
         vertexCount += object.vertexCount;
     }
     NSLog(@"Scene updating Vertices and Normals for Scan Object");
-    NSLog(@"First 100 Vertices:");
-    for (int ii = 0; ii < 100; ii++) {
+    NSLog(@"First 10 Vertices:");
+    for (int ii = 0; ii < 10; ii++) {
         float x = vertices[ii].x;
         NSLog(@"%.2f", x);
         float y = vertices[ii].y;
@@ -232,16 +231,7 @@ Implementation of scene creation functions
         float z = vertices[ii].z;
         NSLog(@"%.2f", z);
     }
-    NSLog(@"First 100 Normals:");
-    for (int ii = 0; ii < 100; ii++) {
-        float x = normals[ii].x;
-        NSLog(@"%.2f", x);
-        float y = normals[ii].y;
-        NSLog(@"%.2f", y);
-        float z = normals[ii].z;
-        NSLog(@"%.2f", z);
-    }
-    
+
 #if !TARGET_OS_IPHONE
     [_vertexPositionBuffer didModifyRange:NSMakeRange(0, _vertexPositionBuffer.length)];
     [_vertexNormalBuffer didModifyRange:NSMakeRange(0, _vertexNormalBuffer.length)];
@@ -258,8 +248,7 @@ Implementation of scene creation functions
                 toBuffer:_previousVertexPositionBuffer
        destinationOffset:0
                     size:_vertexPositionBuffer.length];
-    
-    [blit endEncoding];
+       [blit endEncoding];
     
     // Finally, update the dynamic vertex data for time=0. This vertex data
     // will be updated again when the first frame is rendered. However,
@@ -323,6 +312,7 @@ Implementation of scene creation functions
         
         // Number of instances in the scene
         instanceAccelerationStructure.instanceCount = _sceneObjectInstances.count;
+        NSLog(@"instance Count: %lu", _sceneObjectInstances.count);
         
         // Buffer containing the float4x4 transformation matrix for each instance
         instanceAccelerationStructure.transformBuffer = _instanceTransformBuffer;

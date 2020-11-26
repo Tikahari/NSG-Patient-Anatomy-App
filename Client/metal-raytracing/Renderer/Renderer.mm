@@ -311,7 +311,7 @@ Implementation of platform independent renderer class
     _prevUniforms = _uniforms;
 
     // Compute the camera position and forward, right, and up vectors.
-    float3 position = vector3(-300.0f, 300.0f, 100.0f);
+    float3 position = vector3(-100.0f, 100.0f, 100.0f);
     float3 target = vector3(0.0f, 0.0f, 0.0f);
     
     float3 forward = normalize(target - position);

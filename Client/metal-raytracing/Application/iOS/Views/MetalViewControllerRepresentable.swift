@@ -10,8 +10,6 @@ import Foundation
 import SwiftUI
 import UIKit
 
-
-
 struct MetalViewController: UIViewControllerRepresentable {
     
     var activeScan: HeadScanJSONModel
@@ -21,8 +19,6 @@ struct MetalViewController: UIViewControllerRepresentable {
         self.activeScan = activeScan
         self.dataModel = HeadScanDataModel(verts: activeScan.vertices, faces: activeScan.faces, normals: activeScan.normals, val: activeScan.val, size: activeScan.size)
     }
-    
-    
     
      func makeUIViewController(context: Context) -> ViewController {
         print("Making Metal View Controller")
@@ -47,22 +43,9 @@ struct MetalViewController: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: ViewController, context: Context) {
-        print("updated")
-    }
-    
-//    func makeCoordinator() -> (MetalCoordinator) {
-//        return MetalCoordinator()
-//    }
-//    
-    typealias UIViewControllerType = ViewController
-    
-//    class MetalCoordinator {
-//        init(activeScan: HeadScanJSONModel, parent: UIViewControllerRepresentable) {
-//            self.parent =
-//        }
-//    }
-    func addActiveScantoScene(scan: HeadScanJSONModel) {
         
     }
-    
+
+    typealias UIViewControllerType = ViewController
+
 }

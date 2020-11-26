@@ -229,14 +229,14 @@ void computeSphereVertex(float theta,
     
     [self.sceneObjectInstances addObject:[[SceneObjectInstance alloc] initWithObject:scan transform:matrix_identity_float4x4]];
     
-    SceneObject *sphere = [[SphereSceneObject alloc] initWithRadius:1.0f
-                                                 horizontalSegments:32
-                                                   verticalSegments:16];
-    
-    [self.sceneObjects addObject:sphere];
-    for (NSUInteger i = 0; i < 1; i++)
-        [self.sceneObjectInstances addObject:[[SceneObjectInstance alloc] initWithObject:sphere transform:matrix_identity_float4x4]];
-    
+//    SceneObject *sphere = [[SphereSceneObject alloc] initWithRadius:1.0f
+//                                                 horizontalSegments:32
+//                                                   verticalSegments:16];
+//    
+//    [self.sceneObjects addObject:sphere];
+//    for (NSUInteger i = 0; i < 1; i++)
+//        [self.sceneObjectInstances addObject:[[SceneObjectInstance alloc] initWithObject:sphere transform:matrix_identity_float4x4]];
+//    
     [self finalize];
 }
 
