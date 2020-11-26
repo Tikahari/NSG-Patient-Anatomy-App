@@ -12,6 +12,7 @@ from studies.models import Study
 import numpy as np
 import nibabel as nib
 import skimage.measure as measure
+from skimage.draw import ellipsoid
 import os
 import json
                              
@@ -55,9 +56,18 @@ def auth_login(request):
                   
         # print(s)
         # Open the nifti file
-        img = nib.load(test_path())
-        np_img = np.array(img.dataobj).astype(np.float64)
-        vertices, faces, normals, val = measure.marching_cubes(np_img)
+        # img = nib.load(test_path())
+        # np_img = np.array(img.dataobj).astype(np.float64)
+        # vertices, faces, normals, val = measure.marching_cubes(np_img)
+        
+        # Generate a level set about zero of two identical ellipsoids in 3D
+        ellip_base = ellipsoid(6, 10, 16, levelset=True)
+        ellip_double = np.concatenate((ellip_base[:-1, ...],
+                                    ellip_base[2:, ...]), axis=0)
+
+        # Use marching cubes to obtain the surface mesh of these ellipsoids
+        vertices, faces, normals, val = measure.marching_cubes_lewiner(ellip_double, 0)
+        
         s = ()
         s = {
             # "data": data.tolist(),
