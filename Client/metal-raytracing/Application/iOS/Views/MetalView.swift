@@ -212,62 +212,62 @@ struct MetalView: UIViewRepresentable {
 
         func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
             self.size = size
-            
-            // Release any textures the denoiser is holding on to, then release
-            // everything from the texture allocators.
-            denoiser.releaseTemporaryTextures()
-            textureAllocator.reset()
-            
-            self.previousDepthNormalTexture = textureAllocator.texture(with: MTLPixelFormat.rgba16Float, width: Int(size.width), height: Int(size.height))
-
-            self.previousTexture = textureAllocator.texture(with: MTLPixelFormat.rgba16Float, width: Int(size.width), height: Int(size.height))
-            
-            let renderTargetDescriptor = MTLTextureDescriptor()
-            
-            renderTargetDescriptor.width = Int(size.width)
-            renderTargetDescriptor.height = Int(size.height)
-            
-            // Generate a 2xRGBA32Float 2D array texture to contain shadow ray origins,
-            // min distances, directions, and max distances.
-            renderTargetDescriptor.textureType = MTLTextureType.type2DArray
-            renderTargetDescriptor.pixelFormat = MTLPixelFormat.rgba32Float
-            renderTargetDescriptor.usage = [MTLTextureUsage.renderTarget, MTLTextureUsage.shaderRead]
-            renderTargetDescriptor.arrayLength = 2
-            
-            shadowRayTexture = device!.makeTexture(descriptor: renderTargetDescriptor)
-            
-            // Generate a 1xR32Float 2D array texture to contain the corresponding
-            // intersection distance.
-            renderTargetDescriptor.usage = [MTLTextureUsage.shaderWrite, MTLTextureUsage.shaderRead]
-            renderTargetDescriptor.arrayLength = 1
-            renderTargetDescriptor.pixelFormat = MTLPixelFormat.r32Float
-            
-            intersectionTexture = device!.makeTexture(descriptor: renderTargetDescriptor)
-            
-            // Finally, allocate a 2D R32UInt texture to contain random values for each
-            // pixel. This value is used to decorrelate pixels while drawing pseudorandom
-            // numbers from a Halton sequence while generating shadow rays.
-            renderTargetDescriptor.textureType = MTLTextureType.type2D
-            renderTargetDescriptor.pixelFormat = MTLPixelFormat.r8Uint
-            renderTargetDescriptor.usage = MTLTextureUsage.shaderRead
-            renderTargetDescriptor.arrayLength = 1
-            
-            randomTexture = device!.makeTexture(descriptor: renderTargetDescriptor)
-            
-            var randomValues = [UInt8]()
-            let width = Int(size.width)
-            let height = Int(size.height)
-            for _ in 1...width {
-                randomValues.append(UInt8(Int.random(in: 0...15)))
-            }
-            let ranMemSize = MemoryLayout<UInt8>.size * height
-            
-            let region = MTLRegionMake2D(0, 0, width, height)
-            randomTexture!.replace(region:region,
-                            mipmapLevel:0,
-                            withBytes:randomValues,
-                            bytesPerRow:ranMemSize)
-            frameIndex = 0
+//
+//            // Release any textures the denoiser is holding on to, then release
+//            // everything from the texture allocators.
+//            denoiser.releaseTemporaryTextures()
+//            textureAllocator.reset()
+//
+//            self.previousDepthNormalTexture = textureAllocator.texture(with: MTLPixelFormat.rgba16Float, width: Int(size.width), height: Int(size.height))
+//
+//            self.previousTexture = textureAllocator.texture(with: MTLPixelFormat.rgba16Float, width: Int(size.width), height: Int(size.height))
+//
+//            let renderTargetDescriptor = MTLTextureDescriptor()
+//
+//            renderTargetDescriptor.width = Int(size.width)
+//            renderTargetDescriptor.height = Int(size.height)
+//
+//            // Generate a 2xRGBA32Float 2D array texture to contain shadow ray origins,
+//            // min distances, directions, and max distances.
+//            renderTargetDescriptor.textureType = MTLTextureType.type2DArray
+//            renderTargetDescriptor.pixelFormat = MTLPixelFormat.rgba32Float
+//            renderTargetDescriptor.usage = [MTLTextureUsage.renderTarget, MTLTextureUsage.shaderRead]
+//            renderTargetDescriptor.arrayLength = 2
+//
+//            shadowRayTexture = device!.makeTexture(descriptor: renderTargetDescriptor)
+//
+//            // Generate a 1xR32Float 2D array texture to contain the corresponding
+//            // intersection distance.
+//            renderTargetDescriptor.usage = [MTLTextureUsage.shaderWrite, MTLTextureUsage.shaderRead]
+//            renderTargetDescriptor.arrayLength = 1
+//            renderTargetDescriptor.pixelFormat = MTLPixelFormat.r32Float
+//
+//            intersectionTexture = device!.makeTexture(descriptor: renderTargetDescriptor)
+//
+//            // Finally, allocate a 2D R32UInt texture to contain random values for each
+//            // pixel. This value is used to decorrelate pixels while drawing pseudorandom
+//            // numbers from a Halton sequence while generating shadow rays.
+//            renderTargetDescriptor.textureType = MTLTextureType.type2D
+//            renderTargetDescriptor.pixelFormat = MTLPixelFormat.r8Uint
+//            renderTargetDescriptor.usage = MTLTextureUsage.shaderRead
+//            renderTargetDescriptor.arrayLength = 1
+//
+//            randomTexture = device!.makeTexture(descriptor: renderTargetDescriptor)
+//
+//            var randomValues = [UInt8]()
+//            let width = Int(size.width)
+//            let height = Int(size.height)
+//            for _ in 1...width {
+//                randomValues.append(UInt8(Int.random(in: 0...15)))
+//            }
+//            let ranMemSize = MemoryLayout<UInt8>.size * height
+//
+//            let region = MTLRegionMake2D(0, 0, width, height)
+//            randomTexture!.replace(region:region,
+//                            mipmapLevel:0,
+//                            withBytes:randomValues,
+//                            bytesPerRow:ranMemSize)
+//            frameIndex = 0
 
         }
         
@@ -277,7 +277,7 @@ struct MetalView: UIViewRepresentable {
             guard view.currentDrawable != nil else {
                 return
             }
-            print("Draw being called")
+
             
 //            self.scene.rootNode.children.append(Sphere(name:"sphere1", radius:5, origin: SIMD3(0, 5, 5)))
 //
@@ -332,7 +332,7 @@ struct MetalView: UIViewRepresentable {
 //            
         }
     }
-        
+
 }
 
 struct MetalView_Previews: PreviewProvider {
@@ -340,3 +340,4 @@ struct MetalView_Previews: PreviewProvider {
         /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
+

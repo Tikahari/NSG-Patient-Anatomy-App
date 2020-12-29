@@ -17,26 +17,30 @@ struct MetalViewController: UIViewControllerRepresentable {
     
     init(activeScan: HeadScanJSONModel) {
         self.activeScan = activeScan
-        self.dataModel = HeadScanDataModel(verts: activeScan.vertices, faces: activeScan.faces, normals: activeScan.normals, val: activeScan.val, size: activeScan.size)
+        self.dataModel = HeadScanDataModel(verts: activeScan.vertices, faces: activeScan.faces, normals: activeScan.normals, val: activeScan.val, dim: activeScan.dim, size: activeScan.size, voxels: activeScan.voxels)
     }
     
      func makeUIViewController(context: Context) -> ViewController {
         print("Making Metal View Controller")
-        //Instantitate
+        //Instantitate - ObjC
         let metalViewController: ViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Metal-ObjC")
-        
+
         // Create Pointers to pass arrays to C code.
-        
+
         let verticePointer = UnsafeMutablePointer<SIMD3<Float>>.allocate(capacity: dataModel.size)
         verticePointer.initialize(from: dataModel.vertices, count: dataModel.size)
-        
+
         let normalPointer = UnsafeMutablePointer<SIMD3<Float>>.allocate(capacity: dataModel.size)
         normalPointer.initialize(from: dataModel.normals, count: dataModel.size)
-        
+
         let valPointer = UnsafeMutablePointer<Float>.allocate(capacity: dataModel.size)
         valPointer.initialize(from: dataModel.val, count: dataModel.size)
-        
+  
+//        Instantiate - Swift
+//        let metalViewController: ViewController = MTKViewController()
+
         metalViewController.addDataModel(withVertices: verticePointer, normals: normalPointer, val: valPointer, size: Int32(dataModel.size))
+//        metalViewController.moveCamera(context)
       
         
         return metalViewController

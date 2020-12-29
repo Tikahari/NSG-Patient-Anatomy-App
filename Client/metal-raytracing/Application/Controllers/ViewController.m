@@ -19,6 +19,11 @@ Implementation of the cross-platform view controller
     vector_float3 *_normals;
     float *_val;
     int _size;
+    
+    vector_float3 _camera_position;
+    vector_float3 prev_camera_position;
+    CGPoint _start;
+    CGPoint _end;
 }
 
 - (void)addDataModelWithVertices:(vector_float3 *)vertices
@@ -32,18 +37,36 @@ Implementation of the cross-platform view controller
     _normals = normals;
     _val = val;
     _size = size;
-    
-    
-    
-    
+
 }
 
+
+//- (vector_float3)updateCameraPositionWithTouches
+-(void) panAnim:(UIPanGestureRecognizer*) gestureRecognizer
+{
+   if(gestureRecognizer.state == UIGestureRecognizerStateEnded)
+   {
+      //All fingers are lifted.
+       CGPoint translation = [gestureRecognizer translationInView:_view];
+       NSLog(@"Translation x: %f, y: %f", translation.x, translation.y);
+       
+       float phi = translation.x / M_PI * 180	;
+       float theta = translation.y / M_PI * 180;
+       float radius = 200; // implement a zoom here
+       _camera_position = vector3(radius * cos(phi) * sin(theta), radius * cos(theta), radius * sin(theta) * sin(phi));
+       
+       [_renderer updateCameraWithPosition:_camera_position];
+       
+   }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     _view = (MTKView *)self.view;
 
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAnim:)];
+    [_view addGestureRecognizer:panGesture];
 
 #if TARGET_MACOS
     // Set color space of view to SRGB
@@ -65,6 +88,7 @@ Implementation of the cross-platform view controller
     id <MTLDevice> device = MTLCreateSystemDefaultDevice();
 
     _view.backgroundColor = UIColor.clearColor;
+    _camera_position = (vector3(0.0f,-200.0f,0.0f));
 #endif
     _view.device = device;
 
@@ -80,10 +104,11 @@ Implementation of the cross-platform view controller
     }
     
     _renderer = [[Renderer alloc] initWithMetalKitView:_view
-                                              vertices:(_vertices)
-                                               normals:(_normals)
-                                                   val:(_val)
-                                                  numVerts:(_size)];
+                                               vertices:(_vertices)
+                                                normals:(_normals)
+                                                    val:(_val)
+                                               numVerts:(_size)
+                                               cameraPosition:(_camera_position)];
 
     [_renderer mtkView:_view drawableSizeWillChange:_view.bounds.size];
 

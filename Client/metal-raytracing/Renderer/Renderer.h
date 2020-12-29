@@ -15,18 +15,11 @@ Header for platform independent renderer class
                                    vertices:(nonnull vector_float3 *)vertices
                                     normals:(nonnull vector_float3 *)normals
                                         val:(nonnull float *)val
-                                       numVerts:(int)numVerts;
+                                   numVerts:(int)numVerts
+                             cameraPosition:(vector_float3)position;
+
+- (void)updateCameraWithPosition:(vector_float3 )position;
 
 @end
 
-// A representation of a nifti volume rendering, used to pass to ScanScene
-//@interface ScanVolume : NSObject
-//
-////Initializer
-//- (instancetype)initWithVertices:(NSArray*)vertices
-//                           faces:(NSArray*)faces
-//                         normals:(NSArray*)normals
-//                             val:(NSArray*)val;
-
-//@end
 

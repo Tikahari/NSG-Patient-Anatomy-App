@@ -13,19 +13,25 @@ struct ScanSelectionView: View {
 
     var body: some View {
         NavigationView {
-            List(scans) { scan in
-                NavigationLink(destination: MetalViewController(activeScan: headscans[0])) {
+            List(headscans) { scan in
+
+//                Navigation Link Destination: Obj-C Metal Controller
+//                Arguments: Scan Destination: Currently
+                NavigationLink(destination: MetalViewController(activeScan: scan)) {
+                
+//                Navigation Link Description: SwiftUI MetalKit View
 //                NavigationLink(destination: MetalView(activeScan: $headscans[0])) {
                     HStack {
-                        Image(scan.previewURL)
+//                        Image(scan.previewURL)
+                        Image("ico")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(.all)
                             .frame(width: 175, height: 175 )
                         Spacer()
                         VStack {
-//                            Text(scan.name)
-//                            Text(scan.id)
+                            Text(scan.name)
+                            Text(scan.id)
                         }
                     }
                     .frame(height:150)
@@ -44,11 +50,3 @@ struct ScanSelectionView_Previews: PreviewProvider {
         Text("Preview")
     }
 }
-
-
-
-
-let scans = [
-    HeadScanListModel(name: "Albert Gator", id: "001"),
-    HeadScanListModel(name: "Alberta Gator", id: "002")
-]

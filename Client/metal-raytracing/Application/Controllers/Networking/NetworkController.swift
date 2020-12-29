@@ -7,7 +7,7 @@
 
 import Foundation
 
-let IP_target = "10.0.0.139" //This is dependant on where the django "Medical Server" is running.
+let IP_target = "192.168.1.15" //This is dependant on where the django "Medical Server" is running.
 
 let PORT_target = "8080"
 

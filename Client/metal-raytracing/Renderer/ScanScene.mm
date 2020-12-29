@@ -35,9 +35,13 @@ Implementation of 3D object classes
 - (void)getVertices:(float3 *)vertices
             normals:(float3 *)normals
 {
+    NSLog(@"%i", _numVerts);
     for (NSUInteger ii = 0; ii < _numVerts; ii++) {
         vertices[ii] = _vertices[ii];
         normals[ii] = _normals[ii];
+//        NSLog(@"%.2f", vertices[ii].x);
+//        NSLog(@"%.2f", vertices[ii].y);
+//        NSLog(@"%.2f", vertices[ii].z);
     }
 }
 
@@ -78,8 +82,10 @@ void computeSphereVertex(float theta,
     normal.x = sinf(phi) * cosf(theta);
     normal.y = cosf(phi);
     normal.z = sinf(phi) * sinf(theta);
-
     vertex = radius * normal;
+    NSLog(@"%.2f", vertex.x);
+    NSLog(@"%.2f", vertex.y);
+    NSLog(@"%.2f", vertex.z);
 }
 
 - (void)getVertices:(float3 *)vertices
@@ -110,93 +116,6 @@ void computeSphereVertex(float theta,
 
 @end
 
-//@implementation PlaneSceneObject {
-//    float _size;
-//    NSUInteger _resolution;
-//    float _frequency;
-//    float _amplitude;
-//    float2 _timeScale;
-//
-//    id <MTLComputePipelineState> _updateVerticesPipeline;
-//}
-//
-//- (instancetype)initWithLibrary:(id <MTLLibrary>)library
-//                           size:(float)size
-//                     resolution:(NSUInteger)resolution
-//                      frequency:(float)frequency
-//                      amplitude:(float)amplitude
-//                      timeScale:(float2)timeScale
-//{
-//    self = [super initWithVertexCount:resolution * resolution * 6
-//                             animated:YES];
-//
-//    if (self) {
-//        _size = size;
-//        _resolution = resolution;
-//        _frequency = frequency;
-//        _amplitude = amplitude;
-//        _timeScale = timeScale;
-//
-//        MTLComputePipelineDescriptor *descriptor = [[MTLComputePipelineDescriptor alloc] init];
-//
-//        descriptor.computeFunction = [library newFunctionWithName:@"updatePlaneVerticesKernel"];
-//        descriptor.threadGroupSizeIsMultipleOfThreadExecutionWidth = YES;
-//
-//        NSError *error = nil;
-//
-//        _updateVerticesPipeline = [library.device newComputePipelineStateWithDescriptor:descriptor
-//                                                                                options:0
-//                                                                             reflection:nil
-//                                                                                  error:&error];
-//
-//        if (!_updateVerticesPipeline)
-//        NSLog(@"%@", error);
-//    }
-//
-//    return self;
-//}
-//
-//- (void)getVertices:(float3 *)vertices
-//            normals:(float3 *)normals
-//{
-//}
-//
-//- (void)updateVerticesWithCommandBuffer:(id <MTLCommandBuffer>)commandBuffer
-//                           vertexBuffer:(id <MTLBuffer>)vertexBuffer
-//                           normalBuffer:(id <MTLBuffer>)normalBuffer
-//                           bufferOffset:(NSUInteger)bufferOffset
-//                                   time:(float)time
-//{
-//    PlaneParams params;
-//
-//    params.resolution = (uint32_t)_resolution;
-//    params.invResolution = 1.0f / _resolution;
-//    params.size = _size;
-//    params.frequency = _frequency;
-//    params.amplitude = _amplitude;
-//    params.time = time;
-//    params.timeScale = _timeScale;
-//
-//    id <MTLComputeCommandEncoder> encoder = [commandBuffer computeCommandEncoder];
-//
-//    [encoder setComputePipelineState:_updateVerticesPipeline];
-//
-//    [encoder setBytes:&params       length:sizeof(params) atIndex:0];
-//    [encoder setBuffer:vertexBuffer offset:bufferOffset   atIndex:1];
-//    [encoder setBuffer:normalBuffer offset:bufferOffset   atIndex:2];
-//
-//    MTLSize threadsPerThreadgroup = MTLSizeMake(8, 8, 1);
-//    MTLSize threadgroups = MTLSizeMake((_resolution + threadsPerThreadgroup.width  - 1) / threadsPerThreadgroup.width,
-//                                       (_resolution + threadsPerThreadgroup.height - 1) / threadsPerThreadgroup.height,
-//                                       1);
-//
-//    // Encode a compute kernel to update the vertices on the GPU
-//    [encoder dispatchThreadgroups:threadgroups threadsPerThreadgroup:threadsPerThreadgroup];
-//
-//    [encoder endEncoding];
-//}
-//
-//@end
 
 @implementation ScanScene
  
@@ -225,18 +144,18 @@ void computeSphereVertex(float theta,
 - (void)addScanAndFinalize:(ScanVolumeSceneObject *)scan
 {
     [self.sceneObjects addObject:scan];
-    
-    
+
+//
     [self.sceneObjectInstances addObject:[[SceneObjectInstance alloc] initWithObject:scan transform:matrix_identity_float4x4]];
     
-//    SceneObject *sphere = [[SphereSceneObject alloc] initWithRadius:1.0f
+//    SceneObject *sphere = [[SphereSceneObject alloc] initWithRadius:25.0f
 //                                                 horizontalSegments:32
 //                                                   verticalSegments:16];
-//    
+//
 //    [self.sceneObjects addObject:sphere];
-//    for (NSUInteger i = 0; i < 1; i++)
-//        [self.sceneObjectInstances addObject:[[SceneObjectInstance alloc] initWithObject:sphere transform:matrix_identity_float4x4]];
-//    
+//    [self.sceneObjectInstances addObject:[[SceneObjectInstance alloc] initWithObject:sphere transform:matrix_identity_float4x4]];
+            
+
     [self finalize];
 }
 

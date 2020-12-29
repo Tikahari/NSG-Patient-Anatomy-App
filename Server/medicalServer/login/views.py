@@ -13,6 +13,7 @@ import numpy as np
 import nibabel as nib
 import skimage.measure as measure
 from skimage.draw import ellipsoid
+import matplotlib.pyplot as plt
 import os
 import json
                              
@@ -56,9 +57,11 @@ def auth_login(request):
                   
         # print(s)
         # Open the nifti file
-        # img = nib.load(test_path())
-        # np_img = np.array(img.dataobj).astype(np.float64)
+        img = nib.load(test_path())
+        np_img = np.array(img.dataobj).astype(np.float64)
         # vertices, faces, normals, val = measure.marching_cubes(np_img)
+        
+
         
         # Generate a level set about zero of two identical ellipsoids in 3D
         ellip_base = ellipsoid(6, 10, 16, levelset=True)
@@ -66,19 +69,27 @@ def auth_login(request):
                                     ellip_base[2:, ...]), axis=0)
 
         # Use marching cubes to obtain the surface mesh of these ellipsoids
-        vertices, faces, normals, val = measure.marching_cubes_lewiner(ellip_double, 0)
-        
+        vertices, faces, normals, val = measure.marching_cubes(ellip_double, 1)
+        print(len(vertices))
+        print(vertices.shape)
+        # fig = plt.figure(figsize=(10, 10))
+        # ax = fig.add_subplot(111, projection='3d')
+        # ax.plot_trisurf(vertices[:, 0], vertices[:, 1], faces, vertices[:, 2], linewidth=0.2, antialiased=True)
+        # plt.show()
         s = ()
+    
         s = {
-            # "data": data.tolist(),
-            # "data_shape": np.array(data_shape).tolist(),
+
+            "id": "1",
             "size": len(vertices),
             "vertices": vertices.tolist(),
             "faces": faces.tolist(),
             "normals": normals.tolist(),
-            "val": val.tolist()
+            "val": val.tolist(),
+            "dim": np_img.shape,
+            "voxels": np_img.tolist()
         }
-        print(vertices)
+        # print(vertices.tolist())
         # For testing purposes, An array containing 2  of the same example scan are being sent back on login. This should be changed to have the login return a number of scans, and on scan selection the data for that particular scan should be passed back.
         scans = list()
         scans.append(s)

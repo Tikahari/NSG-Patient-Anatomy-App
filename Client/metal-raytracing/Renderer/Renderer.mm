@@ -47,6 +47,7 @@ Implementation of platform independent renderer class
     
     ScanScene *_scene;
     ScanVolumeSceneObject *_scan;
+    float3 _cameraPosition;
     
 }
 
@@ -55,7 +56,8 @@ Implementation of platform independent renderer class
                                    vertices:(vector_float3 *)vertices
                                     normals:(vector_float3 *)normals
                                         val:(float *)val
-                                   numVerts:(int)numVerts;
+                                   numVerts:(int)numVerts
+                             cameraPosition:(vector_float3)position;
 {
     self = [super init];
 
@@ -63,6 +65,7 @@ Implementation of platform independent renderer class
     {
         _view = view;
         _device = view.device;
+        _cameraPosition = position;
         
         NSLog(@"Metal device: %@", _device.name);
 
@@ -73,7 +76,6 @@ Implementation of platform independent renderer class
         [self createPipelines];
         [self createIntersector];
         
-        NSLog(@"there are %d vertices being loaded in the pointer. Printing from Renderer.", numVerts);
         
         _scan = [[ScanVolumeSceneObject alloc] initWithVertices:vertices normals:normals val:val numVerts:numVerts];
         
@@ -311,7 +313,8 @@ Implementation of platform independent renderer class
     _prevUniforms = _uniforms;
 
     // Compute the camera position and forward, right, and up vectors.
-    float3 position = vector3(-100.0f, 100.0f, 100.0f);
+    
+    float3 position = _cameraPosition;
     float3 target = vector3(0.0f, 0.0f, 0.0f);
     
     float3 forward = normalize(target - position);
@@ -447,7 +450,7 @@ Implementation of platform independent renderer class
         // up the transformation matrix.
         [renderEncoder setVertexBytes:&instanceIndex length:sizeof(instanceIndex) atIndex:8];
         
-        [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:object.vertexCount];
+        [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:object.vertexCount];
         
         instanceIndex++;
     }
@@ -714,6 +717,14 @@ Implementation of platform independent renderer class
     _frameIndex++;
     
     [_scene advanceFrame];
+}
+
+// Handle touch event from view controller
+- (void)updateCameraWithPosition:(vector_float3)position
+                         
+{
+    _cameraPosition = position;
+
 }
 
 @end

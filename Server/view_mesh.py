@@ -10,44 +10,52 @@ from skimage.draw import ellipsoid
 
 
 # # Generate a level set about zero of two identical ellipsoids in 3D
-# ellip_base = ellipsoid(6, 10, 16, levelset=True)
-# ellip_double = np.concatenate((ellip_base[:-1, ...],
-#                                ellip_base[2:, ...]), axis=0)
+ellip_base = ellipsoid(6, 10, 16, levelset=True)
+ellip_double = np.concatenate((ellip_base[:-1, ...],
+                               ellip_base[2:, ...]), axis=0)
 
 # # Use marching cubes to obtain the surface mesh of these ellipsoids
-# verts, faces, normals, values = measure.marching_cubes_lewiner(ellip_double, 0)
+verts, faces, normals, values = measure.marching_cubes(ellip_double, 0)
 
 
 # Use marching cubes to obtain the surface mesh of scan
 img = nib.load("/Users/daniel/Desktop/NSG/results/example.nii.gz")
 
-point_cloud= np.loadtxt("/Users/daniel/Desktop/NSG/results/pc_sample/sample.xyz",skiprows=1)
-print(point_cloud)
-pcd = o3d.geometry.PointCloud()
-print(pcd)
-pcd.points = o3d.utility.Vector3dVector(point_cloud[:,:3])
-print(pcd.points)
-pcd.colors = o3d.utility.Vector3dVector(point_cloud[:,3:6]/255)
-o3d.visualization.draw_geometries([pcd])
+# point_cloud= np.loadtxt("/Users/daniel/Desktop/NSG/results/pc_sample/sample.xyz",skiprows=1)
+# print(point_cloud)
+# pcd = o3d.geometry.PointCloud()
+# print(pcd)
+# pcd.points = o3d.utility.Vector3dVector(point_cloud[:,:3])
+# print(pcd.points)
+# pcd.colors = o3d.utility.Vector3dVector(point_cloud[:,3:6]/255)
+# o3d.visualization.draw_geometries([pcd])
 
 
-np_img = np.array(img.dataobj).astype(np.float64)
-
-# verts, faces, normals, val = measure.marching_cubes(np_img)
+nifti_data = np.array(img.dataobj).astype(np.float64)
+# print(np_img)
+print(nifti_data.shape)
+# verts, faces, normals, val = measure.marching_cubes(nifti_data, 0)
+print(verts.shape)
+print(verts.tolist())
 # print("faces:")
 # print(faces)
 # print("Verts[Faces]:")
 # print(verts[faces])
 # # Display resulting triangular mesh using Matplotlib. This can also be done
 # # with mayavi (see skimage.measure.marching_cubes_lewiner docstring).
-# fig = plt.figure(figsize=(10, 10))
-# ax = fig.add_subplot(111, projection='3d')
-
+# print(verts[faces])
+# print(normals[faces])
+fig = plt.figure(figsize=(10, 10))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_trisurf(verts[:, 0], verts[:, 1], faces, verts[:, 2], linewidth=0.2, antialiased=True)
+plt.show()
 # # Fancy indexing: `verts[faces]` to generate a collection of triangles
 # mesh = Poly3DCollection(verts[faces])
 # mesh.set_edgecolor('k')
 # ax.add_collection3d(mesh)
-
+print(verts[:,0])
+print(verts[:,1])
+print(verts[:,2])
 # ax.set_xlabel("x-axis: a = 6 per ellipsoid")
 # ax.set_ylabel("y-axis: b = 10")
 # ax.set_zlabel("z-axis: c = 16")

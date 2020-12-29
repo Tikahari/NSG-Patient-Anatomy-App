@@ -23,8 +23,6 @@ struct LoginView: View {
     
     var body: some View {
         if networkController.isAuthenticated {
-//            MetalView(scans: $networkController.scans)
-//            MetalViewController()
             ScanSelectionView(headscans: $networkController.scans)
         } else {
             VStack{

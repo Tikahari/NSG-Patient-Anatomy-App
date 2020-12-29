@@ -142,7 +142,7 @@ fragment FragmentOut fragmentFunction(VertexOut in [[stage_in]],
     // sequence. This sequence will ensure good coverage of the light source.
     float2 r = haltonSamples[(offset + uniforms.frameIndex) % 16];
     
-    float3 lightDirection = normalize(float3(-0.6f, 1.0f, 0.2f));
+    float3 lightDirection = normalize(float3(1.0, 0.0f, 0.0f));
     
     // Compute the lighting using a simple diffuse reflection model
     float3 radiance = saturate(dot(N, lightDirection));
